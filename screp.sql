@@ -105,5 +105,3 @@ INSERT INTO botton
 	('superman', 'azul'),
 	('superman', 'branco'),
 	('superman', 'preto');
-
-SELECT botton.estoque, botton.descricao, botton.codigo_estampa, botton.codigo_cor, estampa.nome as nome_estampa, cor.nome as nome_cor FROM botton, estampa, cor WHERE botton.codigo_cor = cor.codigo AND botton.codigo_estampa = estampa.codigo ORDER BY estampa.nome, cor.nome;
