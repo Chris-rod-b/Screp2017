@@ -475,7 +475,7 @@ iframe
 {
 	float: left;
 	width: 20%;
-	display: flex;
+	display: block;
 	margin: 0em;
 }
 
