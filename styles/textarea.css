@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+textarea
+{
+	border-radius: 0.5em;
+	border: calc(0.5em / 8) solid lightgray;
+	padding: calc(0.5em * 15 / 8);
+	box-shadow: inset 0em 0em 1.25em 0em rgba(0, 0, 0, 0.2);
+	background-color: hsl(0, 0%, 98.5%);
+	background-image: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.05) calc(0.5em * 10 / 8), rgba(0, 0, 0, 0.05) calc(0.5em * 11 / 8), transparent calc(0.5em * 11 / 8), transparent calc(0.5em * 31 / 8)), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) calc(0.5em * 10 / 8), rgba(0, 0, 0, 0.05) calc(0.5em * 11 / 8), transparent calc(0.5em * 11 / 8), transparent calc(0.5em * 31 / 8)), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.025) calc(0.5em * 17 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 18 / 8), transparent calc(0.5em * 18 / 8), transparent calc(0.5em * 24 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 24 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 25 / 8), transparent calc(0.5em * 25 / 8), transparent calc(0.5em * 38 / 8)), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.025) calc(0.5em * 17 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 18 / 8), transparent calc(0.5em * 18 / 8), transparent calc(0.5em * 24 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 24 / 8), rgba(0, 0, 0, 0.025) calc(0.5em * 25 / 8), transparent calc(0.5em * 25 / 8), transparent calc(0.5em * 38 / 8));
+	max-width: 100%;
+	max-height: 85vh;
+	resize: both;
+	color: rgba(0, 0, 0, 0.8);
+	transition-duration: 0.4s;
+	transition-property: background-color, color, border-color, box-shadow;
+	/* background-attachment: local; */
+	box-sizing: border-box;
+	overflow-x: hidden;
+	overflow-y: auto;
+	min-width: min-content;
+	min-height: 10em;
+	break-inside: avoid;
+}
+
+textarea:enabled:hover, textarea:enabled:active
+{
+	background-color: hsl(350, 100%, 99.5%);
+	border-color: hsl(350, 100%, 88%);
+	box-shadow: inset 0em 0em 1.5em 0em rgba(0, 0, 0, 0.2);
+}
+
+textarea:enabled:focus
+{
+	border-color: lightgreen;
+	color: rgba(0, 0, 0, 0.9);
+	background-color: hsl(120, 73%, 98%);
+	transition: 0.4s background-color, 5s color, 0.2s border-color, 0.4s box-shadow;
+}
+
+textarea:disabled
+{
+	box-shadow: none;
+	background-color: hsl(0, 0%, 95%);
+	color: rgba(0, 0, 0, 0.3);
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+textarea::-webkit-input-placeholder
+{
+	opacity: 0.5 !important;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+textarea::placeholder
+{
+	opacity: 0.5 !important;
+	color: rgba(0, 0, 0, 0.7);
+}

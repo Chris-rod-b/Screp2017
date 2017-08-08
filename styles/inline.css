@@ -1,0 +1,232 @@
+@charset "utf-8";
+
+@keyframes blink-text
+{
+	80%
+	{
+		color: transparent;
+	}
+}
+
+@keyframes blink-text-fast
+{
+	50%
+	{
+		color: transparent;
+	}
+}
+
+strong
+{
+	color: black;
+	font-weight: bolder;
+}
+
+strong strong
+{
+	text-transform: uppercase;
+}
+
+strong strong strong
+{
+	animation: blink-text 1s steps(1, end) infinite !important;
+}
+
+strong strong strong strong
+{
+	animation: blink-text-fast 0.4s steps(1, end) infinite !important;
+}
+
+strong strong strong strong strong
+{
+	animation: blink-text-fast 0.2s steps(1, end) infinite !important;
+}
+
+strong strong strong strong strong strong
+{
+	color: red;
+}
+
+strong strong strong strong::selection
+{
+	background-color: red;
+}
+
+b, dfn
+{
+	font-weight: unset;
+	font-variant: small-caps;
+}
+
+em
+{
+	font-style: italic;
+}
+
+em em
+{
+	font-style: oblique;
+}
+
+em em em
+{
+	font-style: initial;
+	font-weight: bold;
+}
+
+em em em em
+{
+	font-style: italic;
+}
+
+em em em em em
+{
+	font-style: oblique;
+}
+
+em em em em em em
+{
+	font-style: initial;
+	font-variant: small-caps;
+}
+
+em em em em em em em
+{
+	font-style: italic;
+}
+
+em em em em em em em em
+{
+	font-style: oblique;
+}
+
+samp, code
+{
+	font-style: unset;
+	font-family: "Ubuntu Mono", monospace, sans-serif !important;
+}
+
+s
+{
+	text-decoration: none;
+	font-style: italic;
+	color: crimson;
+}
+
+abbr[title].desc::after
+{
+	content: " (\"" attr(title) "\")";
+}
+
+abbr[title]
+{
+	cursor: help;
+}
+
+abbr.acronym
+{
+	text-transform: lowercase;
+	font-variant: small-caps;
+}
+
+mark
+{
+	background-color: pink;
+	color: lightyellow;
+}
+
+small
+{
+	font-size: smaller;
+}
+
+code, pre
+{
+	font-family: "Ubuntu Mono", monospace, sans-serif !important;
+}
+
+kbd, code
+{
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 0.5em;
+	padding: 0em 0.5em;
+	padding: logical 0em 0.5em;
+	break-inside: avoid;
+}
+
+code
+{
+	color: purple;
+}
+
+pre
+{
+	border: calc(0.5em / 8) solid black;
+	border-radius: 0.5em;
+	background-color: whitesmoke;
+	padding: 0.5em;
+	tab-size: 4;
+	margin: 0.5em 0em;
+	break-inside: avoid;
+}
+
+
+pre code
+{
+	color: unset;
+	background: unset;
+	padding: unset;
+}
+
+pre code:only-child
+{
+	display: block;
+}
+
+del, ins
+{
+	text-decoration: none;
+	border-radius: 0.5em;
+	border-style: solid;
+	border-width: 0em 0.5em;
+	word-wrap: normal;
+}
+
+del
+{
+	border-color: crimson;
+	background-color: rgb(255, 150, 150);
+}
+
+ins
+{
+	border-color: lightgreen;
+	background-color: hsl(120, 73%, 88%);
+}
+
+@media print
+{
+	s
+	{
+		text-decoration: line-through;
+	}
+}
+
+sub, sup
+{
+	font-size: 75%;
+	vertical-align: unset;
+	line-height: 0;
+	position: relative;
+	font-weight: bolder;
+}
+
+sub
+{
+	bottom: -0.25em;
+}
+
+sup
+{
+	top: -0.5em;
+}

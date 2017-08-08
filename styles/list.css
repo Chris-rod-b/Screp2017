@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+ul, ol
+{
+	margin: 1em 0em;
+	padding-left: calc(1em + 3ch);
+}
+
+li
+{
+	break-inside: avoid;
+}

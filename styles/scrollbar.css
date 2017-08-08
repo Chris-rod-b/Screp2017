@@ -1,0 +1,131 @@
+@charset "utf-8";
+
+::-webkit-scrollbar
+{
+	width: 1em;
+	height: 1em;
+}
+
+::-webkit-scrollbar-button
+{
+	display: none;
+}
+
+::-webkit-scrollbar-track:enabled
+{
+	background: #FAFAFA;
+	box-shadow: inset 0em 0em calc(0.5em * 10 / 8) 0em rgba(0, 0, 0, 0.3);
+}
+
+:disabled::-webkit-scrollbar-track:enabled
+{
+	box-shadow: none;
+	background-color: rgb(230, 230, 230);
+}
+
+::-webkit-scrollbar-track:disabled
+{
+	background: rgb(220, 220, 220);
+}
+
+:not(html):not(body)::-webkit-scrollbar-track:vertical
+{
+	border-top-right-radius: 0.5em;
+}
+
+:not(html):not(body)::-webkit-scrollbar-track:horizontal
+{
+	border-bottom-left-radius: 0.5em;
+}
+
+:not(html):not(body)::-webkit-scrollbar-track:not(:corner-present)
+{
+	border-bottom-right-radius: 0.5em;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background: rgb(220, 220, 220);
+	border-radius: 0.5em;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb
+{
+	background: rgb(190, 190, 190);
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+	box-shadow: inset 0em 0em 1em 0em pink;
+}
+
+::-webkit-scrollbar-thumb:active
+{
+	box-shadow: inset 0em 0em 1em 0em orange;
+}
+
+::-webkit-scrollbar-corner, ::-webkit-resizer
+{
+	width: 1em;
+	height: 1em;
+	border-top: calc(0.5em / 8) solid lightgrey;
+	border-left: calc(0.5em / 8) solid lightgrey;
+}
+
+::-webkit-resizer
+{
+	background: linear-gradient(135deg, white 0%, lightgray 100%);
+	cursor: nesw-resize;
+}
+
+::-webkit-scrollbar-corner,
+:disabled::-webkit-resizer
+{
+	background: lightgray;
+}
+
+::-webkit-scrollbar-track-piece
+{
+	border-top-right-radius: 0.5em;
+}
+
+::-webkit-scrollbar-track-piece:vertical:start:hover
+{
+	background-image: linear-gradient(180deg, rgba(255, 192, 203, 0.5) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:vertical:end:hover
+{
+	background-image: linear-gradient(0deg, rgba(255, 192, 203, 0.5) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:horizontal:start:hover
+{
+	background-image: linear-gradient(90deg, rgba(255, 192, 203, 0.5) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:horizontal:end:hover
+{
+	background-image: linear-gradient(-90deg, rgba(255, 192, 203, 0.5) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:vertical:start:active
+{
+	background-image: linear-gradient(180deg, rgba(255, 165, 0, 0.18) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:vertical:end:active
+{
+	background-image: linear-gradient(0deg, rgba(255, 165, 0, 0.18) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:horizontal:start:active
+{
+	background-image: linear-gradient(90deg, rgba(255, 165, 0, 0.18) 0em, transparent 8em);
+}
+
+::-webkit-scrollbar-track-piece:horizontal:end:active
+{
+	background-image: linear-gradient(-90deg, rgba(255, 165, 0, 0.18) 0em, transparent 8em);
+}

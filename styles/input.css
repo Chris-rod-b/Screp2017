@@ -1,0 +1,513 @@
+@charset "utf-8";
+
+input
+{
+	display: inline-block;
+	break-inside: avoid;
+	padding: 0em;
+}
+
+.input-inline, .input-block
+{
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.input-inline:disabled, .input-block:disabled
+{
+	cursor: default;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.input-inline
+{
+	transition: 0.2s border-color;
+	border: none;
+	border-bottom: calc(0.5em / 8) rgb(160, 160, 160) solid;
+	background-color: transparent;
+	color: rgba(0, 0, 0, 0.6);
+	text-overflow: ellipsis;
+}
+
+.input-inline:enabled:hover
+{
+	border-color: pink;
+	background-image: radial-gradient(ellipse farthest-side at bottom, rgba(255, 192, 203, 0.15), transparent);
+	color: hsla(350, 100%, 13%, 0.65);
+}
+
+/*
+.input-inline:enabled:invalid
+{
+	color: crimson;
+	border-color: crimson;
+	background-image: radial-gradient(ellipse farthest-side at bottom, rgba(237, 20, 61, 0.2), transparent);
+}
+*/
+
+.input-inline:enabled:focus
+{
+	border-color: lightgreen;
+	background-image: radial-gradient(ellipse farthest-side at bottom, rgba(145, 238, 145, 0.2), transparent);
+	color: hsla(120, 73%, 6%, 0.7);
+	animation: none;
+}
+
+.input-inline:disabled
+{
+	border-color: transparent;
+}
+
+.input-block
+{
+	color: rgba(0, 0, 0, 0.8);
+	text-overflow: clip;
+	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2);
+	background-color: hsl(0, 0%, 98.5%);
+	border-radius: 0.5em;
+	border: calc(0.5em / 8) solid lightgrey;
+	padding: 0em;
+	box-sizing: border-box;
+	transition-duration: 0.4s;
+	transition-property: background-color, border-color, box-shadow, color;
+	background-color: hsl(0, 0%, 98.5%);
+	display: inline-flex;
+	padding: calc(0.5em * 7 / 8);
+}
+
+.input-block:disabled
+{
+	box-shadow: none;
+	background-color: hsl(0, 0%, 95%);
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.input-block:enabled:hover
+{
+	background-color: hsl(350, 100%, 98.5%);
+	border-color: hsl(350, 100%, 88%);
+	box-shadow: inset 0em 0em 1em 0em rgba(0, 0, 0, 0.2);
+}
+
+/*
+.input-block:enabled:invalid:not(:focus)
+{
+	color: crimson;
+	border-color: crimson;
+	box-shadow: inset 0em 0em 0.625em 0em rgba(237, 20, 61, 0.3);
+}
+*/
+
+.input-block:enabled:focus
+{
+	border-color: lightgreen;
+	background-color: hsl(120, 73%, 98%);
+	color: rgba(0, 0, 0, 0.9);
+}
+
+/*
+	.input-block.input-buttons
+	{
+		padding: 0px;
+		text-indent: 8px;
+		height: calc(3.5ex + 2px);
+	}
+	
+	.input-block[type="time"i]
+	{
+		text-indent: 0px;
+	}
+	
+	.input-block::-webkit-datetime-edit-fields-wrapper
+	{
+		text-indent: 0px;
+	}
+	
+	.input-block::-webkit-clear-button,
+	.input-block::-webkit-search-cancel-button,
+	.input-block::-webkit-inner-spin-button,
+	.input-block::-webkit-calendar-picker-indicator
+	{
+		visibility: visible;
+		display: block;
+		opacity: 1;
+		height: 3.5ex;
+		width: 3.5ex;
+		padding: 0px;
+		-webkit-appearance: none;
+		background-color: hsl(0, 0%, 98.5%);
+		box-sizing: content-box;
+		border-left: 1px solid lightgray;
+		margin: 0px;
+		cursor: pointer;
+	}
+	
+	.input-block::-webkit-clear-button,
+	.input-block::-webkit-search-cancel-button
+	{
+		order: -1;
+		opacity: 1 !important;
+		border-left: none;
+		border-right: 1px solid lightgray;
+		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+		background-image:
+			linear-gradient(45deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 30%, transparent 30%, transparent 70%, hsl(0, 0%, 98.5%) 70%, hsl(0, 0%, 98.5%) 100%),
+			linear-gradient(-45deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 30%, transparent 30%, transparent 70%, hsl(0, 0%, 98.5%) 70%, hsl(0, 0%, 98.5%) 100%),
+			linear-gradient(45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%),
+			linear-gradient(-45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%);
+	}
+	
+	.input-block::-webkit-clear-button[style~="opacity:"],
+	.input-block::-webkit-search-cancel-button[style~="opacity:"],
+	.input-block:disabled::-webkit-clear-button,
+	.input-block:disabled::-webkit-search-cancel-button
+	{
+		background-color: hsl(0, 0%, 95%);
+		background-image:
+			linear-gradient(45deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 30%, transparent 30%, transparent 70%, hsl(0, 0%, 95%) 70%, hsl(0, 0%, 95%) 100%),
+			linear-gradient(-45deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 30%, transparent 30%, transparent 70%, hsl(0, 0%, 95%) 70%, hsl(0, 0%, 95%) 100%),
+			linear-gradient(45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%),
+			linear-gradient(-45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%);
+	}
+	
+	.input-block::-webkit-clear-button:hover,
+	.input-block::-webkit-search-cancel-button:hover
+	{
+		background-color: hsl(350, 100%, 96%);
+		background-image:
+			linear-gradient(45deg, hsl(350, 100%, 96%) 0%, hsl(350, 100%, 96%) 30%, transparent 30%, transparent 70%, hsl(350, 100%, 96%) 70%, hsl(350, 100%, 96%) 100%),
+			linear-gradient(-45deg, hsl(350, 100%, 96%) 0%, hsl(350, 100%, 96%) 30%, transparent 30%, transparent 70%, hsl(350, 100%, 96%) 70%, hsl(350, 100%, 96%) 100%),
+			linear-gradient(45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%),
+			linear-gradient(-45deg, transparent 0%, transparent 47%, rgb(50, 50, 50) 47%, rgb(50, 50, 50) 53%, transparent 53%);
+	}
+	
+	.input-block::-webkit-inner-spin-button,
+	.input-block::-webkit-clear-button,
+	.input-block::-webkit-search-cancel-button
+	{
+		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+		transition: 0.4s box-shadow;
+	}
+	
+	.input-block::-webkit-inner-spin-button
+	{
+		width: 1.75ex;
+	}
+	
+	.input-block:hover::-webkit-spin-button,
+	.input-block:hover::-webkit-clear-button,
+	.input-block:hover::-webkit-search-cancel-button
+	{
+		box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+	}
+	
+	.input-block::-webkit-inner-spin-button::before,
+	.input-block::-webkit-inner-spin-button::after
+	{
+		content: "";
+		display: block;
+		width: 1.75ex;
+		height: 1.75ex;
+		box-sizing: border-box;
+	}
+	
+	.input-block::-webkit-inner-spin-button::before:hover,
+	.input-block::-webkit-inner-spin-button::after:hover
+	{
+		box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+	}
+	
+	.input-block::-webkit-inner-spin-button::before
+	{
+		box-sizing: border-box;
+		height: calc(1.75ex - 0.5px);
+		background-image: linear-gradient(120deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 37.5%, transparent 37.5%), linear-gradient(-120deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 37.5%, transparent 37.5%), linear-gradient(180deg, rgb(50, 50, 50) 0%, rgb(50, 50, 50) 75%, transparent 75%, transparent 100%);
+	}
+	
+	.input-block::-webkit-inner-spin-button::after
+	{
+		box-sizing: border-box;
+		border-top: 1px solid lightgray;
+		height: calc(1.75ex + 0.5px);
+		background-image: linear-gradient(60deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 37.5%, transparent 37.5%), linear-gradient(-60deg, hsl(0, 0%, 98.5%) 0%, hsl(0, 0%, 98.5%) 37.5%, transparent 37.5%), linear-gradient(0deg, rgb(50, 50, 50) 0%, rgb(50, 50, 50) 75%, transparent 75%, transparent 100%);
+	}
+	
+	.input-block::-webkit-calendar-picker-indicator
+	{
+		width: 0px;
+		padding-right: 3.5ex;
+		background-image: radial-gradient(ellipse 50% 50%, rgb(50, 50, 50) 0%, rgb(50, 50, 50) 50%, transparent 50%, transparent 100%);
+		box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+		transition-duration: 0.4s;
+		transition-property: box-shadow, background-color;
+		border-radius: 0px 7px 7px 0px;
+	}
+	
+	.input-block::-webkit-calendar-picker-indicator:hover
+	{
+		box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+		background-color: hsl(350, 100%, 95%);
+	}
+	
+	.input-block::-webkit-calendar-picker-indicator:active
+	{
+		box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+		background-color: hsl(39, 100%, 92%);
+		transition: 2.5s box-shadow, 0.2 background-color;
+	}
+	
+	.input-block:disabled::-webkit-clear-button,
+	.input-block:disabled::-webkit-search-cancel-button,
+	.input-block:disabled::-webkit-inner-spin-button,
+	.input-block:disabled::-webkit-calendar-picker-indicator
+	{
+		box-shadow: none;
+		background-color: hsl(0, 0%, 95%);
+	}
+	
+	.input-block:invalid::-webkit-clear-button,
+	.input-block:invalid::-webkit-search-cancel-button,
+	.input-block:invalid::-webkit-inner-spin-button
+	{
+		box-shadow: 0px 0px 10px 0px rgba(237, 20, 61, 0.3);
+	}
+	
+	.input-block:disabled::-webkit-inner-spin-button::before
+	{
+		background-image: linear-gradient(120deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 37.5%, transparent 37.5%), linear-gradient(-120deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 37.5%, transparent 37.5%), linear-gradient(180deg, rgb(50, 50, 50) 0%, rgb(50, 50, 50) 75%, transparent 75%, transparent 100%);
+	}
+	
+	.input-block:disabled::-webkit-inner-spin-button::after
+	{
+		background-image: linear-gradient(60deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 37.5%, transparent 37.5%), linear-gradient(-60deg, hsl(0, 0%, 95%) 0%, hsl(0, 0%, 95%) 37.5%, transparent 37.5%), linear-gradient(0deg, rgb(50, 50, 50) 0%, rgb(50, 50, 50) 75%, transparent 75%, transparent 100%);
+	}
+*/
+
+input[type="checkbox"i],
+input[type="radio"i]
+{
+	height: 0em;
+	width: 0em;
+	
+	-webkit-appearance: none;
+	padding: 0.625em;
+	box-sizing: border-box;
+	border: calc(0.5em / 8) solid lightgrey;
+	max-width: 100%;
+	max-height: 100%;
+	transition-duration: 0.4s;
+	transition-property: background, color, border-color, box-shadow;
+	background: hsl(0, 0%, 98.5%);
+	margin: 0em;
+	vertical-align: middle;
+}
+
+input[type="checkbox"i]
+{
+	border-radius: 0.375em;
+}
+
+input[type="radio"i]
+{
+	border-radius: 50%;
+}
+
+input[type="checkbox"i]:enabled,
+input[type="radio"i]:enabled
+{
+	cursor: pointer;
+	box-shadow: inset 0em 0em 0.625em 0em rgba(0, 0, 0, 0.2);
+	background-color: hsl(0, 0%, 98.5%);
+}
+
+input[type="checkbox"i]:disabled,
+input[type="radio"i]:disabled
+{
+	background: rgb(245, 245, 245);
+	cursor: default;
+}
+
+input[type="checkbox"i]:enabled:hover,
+input[type="radio"i]:enabled:hover
+{
+	background: hsl(350, 100%, 98%);
+	border-color: hsl(350, 100%, 88%);
+	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2), inset 0em 0em 0.5em 0.5em rgba(255, 192, 203, 0.4);
+}
+
+input[type="checkbox"i]:enabled:focus,
+input[type="radio"i]:enabled:focus
+{
+	border-color: lightgreen;
+	background: hsl(120, 73%, 95%);
+	transition: 0.4s background, 0.2s border, 0.2s box-shadow;
+}
+
+input[type="checkbox"i]:enabled:active,
+input[type="radio"i]:enabled:active
+{
+	border-color: orange;
+	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2), inset 0em 0em 0.5em 0em rgba(255, 165, 0, 0.5);
+	transition: 0.4s background, 0.1s border, 0.1s box-shadow;
+	background: #FAFAFA;
+}
+
+input[type="checkbox"i]:enabled:checked,
+input[type="radio"i]:enabled:checked
+{
+	background-image: radial-gradient(ellipse 50% 50%, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 50%, transparent 100%);
+}
+
+input[type="checkbox"i]:disabled:checked,
+input[type="radio"i]:disabled:checked
+{
+	background-image: radial-gradient(ellipse 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 50%, transparent 100%);
+}
+
+input[type="checkbox"i]:enabled:indeterminate
+{
+	background-image: radial-gradient(ellipse 50% 25%, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 50%, transparent 100%);
+}
+
+input[type="range"i]
+{
+	-webkit-appearance: none;
+	padding: 0.25em 0em;
+	background: transparent;
+}
+
+input::-webkit-slider-runnable-track
+{
+	-webkit-appearance: none;
+	background: lightgray;
+	border: none;
+	box-sizing: border-box;
+	height: 0.5em;
+	border-radius: 0.25em;
+	transition: 0.4s background;
+}
+
+input::-webkit-slider-thumb
+{
+	-webkit-appearance: none;
+	border: none;
+	cursor: grab;
+	transition: 0.4s background, 0.4s width, 0.4s height, 0.4s margin;
+	box-sizing: border-box;
+	border-radius: 0.5em;
+}
+
+input:enabled::-webkit-slider-thumb
+{
+	background: lightblue;
+	width: 1em;
+	height: 1em;
+	margin-top: -0.25em;
+	cursor: -webkit-grab;
+}
+
+input:disabled::-webkit-slider-thumb
+{
+	width: 0.5em;
+	height: 0.5em;
+	background: gray;
+}
+
+input:enabled:focus::-webkit-slider-thumb
+{
+	background: lightgreen;
+}
+
+input:enabled::-webkit-slider-thumb:hover
+{
+	background: pink;
+}
+
+input:enabled::-webkit-slider-thumb:active
+{
+	cursor: -webkit-grabbing;
+	cursor: grabbing;
+	background: orange;
+	transition: 0.1s background-color
+}
+
+input[type="color"i]
+{
+	-webkit-appearance: none;
+	border: calc(0.5em * 2.5 / 8) solid lightgray;
+	padding: 0em;
+	border-radius: 0.5em;
+	overflow: hidden;
+	box-sizing: border-box;
+	width: 3em;
+	height: 3em;
+	transition: 0.4s border-color;
+}
+
+input[type="color"i]:enabled
+{
+	cursor: pointer;
+}
+
+input[type="color"i]:enabled:focus
+{
+	border-color: lightgreen;
+}
+
+input[type="color"i]:enabled:hover
+{
+	border-color: pink;
+}
+
+input[type="color"i]:enabled:active
+{
+	transition-duration: 0.1s;
+	border-color: orange;
+}
+
+input::-webkit-color-swatch-wrapper
+{
+	padding: 0em;
+}
+
+input::-webkit-color-swatch
+{
+	border: none;
+	transition: 0.4 box-shadow;
+}
+
+input:enabled::-webkit-color-swatch
+{
+	box-shadow: inset 0em 0em 1em 0em rgba(0, 0, 0, 0.5);
+}
+
+input::placeholder
+{
+	opacity: 0.5 !important;
+	color: rgba(0, 0, 0, 0.6);
+	overflow: hidden;
+}
+
+input:enabled:hover::placeholder
+{
+	opacity: 0.5 !important;
+	color: hsla(350, 100%, 13%, 0.65);
+}
+
+input:enabled:focus::placeholder
+{
+	opacity: 0.5 !important;
+	color: hsla(120, 73%, 15%, 0.7);
+}
+
+label:has(input[type="checkbox"i]:enabled, input[type="radio"i]:enabled)
+{
+	cursor: pointer;
+}
+
+::-webkit-search-cancel-button
+{
+	display: none;
+}

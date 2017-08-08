@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+fieldset
+{
+	padding: 1em;
+	margin: 1em 0em;
+	margin: logical 1em 0em;
+	border: calc(0.5em / 8) solid gray;
+	border-radius: 1em;
+	break-inside: avoid;
+}
+
+fieldset legend + *
+{
+	margin-top: 0en;
+}
+
+legend
+{
+	border: inherit;
+	padding: 0.5em;
+	margin: 0em;
+	border-radius: 0.5em;
+	box-sizing: border-box;
+}

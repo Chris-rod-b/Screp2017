@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+article:first-child,
+figure:first-child,
+pre:first-child,
+ul:first-child,
+ol:first-child,
+p:first-child,
+table:first-child
+
+summary + article,
+summary + figure,
+summary + pre,
+summary + ul,
+summary + ol,
+summary + p,
+summary + table
+
+legend + article,
+legend + figure,
+legend + pre,
+legend + ul,
+legend + ol,
+legend + p
+legend + table
+{
+	margin-top: 0em; /* margin-block-start: 0em; */
+}
+
+article:last-child,
+figure:last-child,
+pre:last-child,
+ul:last-child,
+ol:last-child,
+p:last-child,
+table:last-child
+{
+	margin-bottom: 0em; /* margin-block-end: 0em; */
+}

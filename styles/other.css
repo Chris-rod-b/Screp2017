@@ -1,0 +1,117 @@
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css?family=Istok+Web:400,400i,700,700i");
+
+*
+{
+	transition-delay: 0s !important;
+	transition-timing-function: ease-out !important;
+	transition-duration: 0s;
+	transition-property: none;
+	box-sizing: border-box;
+	font: inherit;
+	overflow-wrap: break-word;
+	outline: none;
+	font-size: 100%;
+	text-size-adjust: none;
+	overflow: hidden;
+	word-break: break-word;
+}
+
+::selection
+{
+	background: gold;
+	color: rgba(255, 255, 255, 0.95);
+}
+
+html
+{
+	background: #DDD;
+	min-height: 100vh;
+	padding: 2em 1em;
+	overflow: auto;
+}
+
+@media (min-width: 70em)
+{
+	html
+	{
+		padding: 2em 15%;
+	}
+}
+
+body
+{
+	background: #FAFAFA;
+	color: rgba(0, 0, 0, 0.8);
+	font-family: "Istok Web", sans-serif;
+	margin: 0em;
+	border: 0em;
+	padding: 2em;
+	box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2);
+	border-radius: 2em;
+	min-height: -webkit-fill-available;
+	min-height: fill;
+	overflow: auto;
+}
+
+:disabled
+{
+	pointer-events: none;
+}
+
+[contenteditable]:not([contenteditable="false"i])
+{
+	white-space: pre-wrap;
+	cursor: auto;
+}
+
+[contenteditable]:not([contenteditable="false"i]) [contenteditable="false"i]
+{
+	white-space: normal;
+	cursor: default;
+}
+
+@media print
+{
+	*
+	{
+		box-shadow: none !important;
+		animation: none !important;
+		transition: none !important;
+	}
+	
+	html, body
+	{
+		background: transparent !important;
+		margin: unset !important;
+		border: unset !important;
+		padding: unset !important;
+		border-radius: unset !important;
+		min-height: unset;
+	}
+	
+	form, input, button, textarea, select, fieldset, legend
+	{
+		display: none !important;
+	}
+}
+
+@media print and (orientation: landscape) and (min-width: 60em)
+{
+	html
+	{
+		columns: 2;
+		column-gap: 2em;
+	}
+}
+
+[contenteditable] :empty::before
+{
+	content: "\D";
+}
+
+[hidden]
+{
+	display: none !important;
+}

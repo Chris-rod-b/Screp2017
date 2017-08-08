@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+@keyframes meownica-zomg
+{
+	0%
+	{
+		color: lightblue;
+	}
+	
+	50%
+	{
+		color: pink;
+	}
+	
+	100%
+	{
+		color: lightgreen;
+	}
+}
+
+a
+{
+	text-decoration: none;
+}
+
+a:link, a:visited
+{
+	transition: 0.4s color;
+	break-inside: avoid;
+}
+
+a:link
+{
+	color: lightblue;
+}
+
+a:visited
+{
+	color: pink;
+}
+
+a:link:hover, a:visited:hover
+{
+	animation: meownica-zomg 0.5s linear 0s infinite alternate none running;
+}
+
+a:link:focus, a:visited:focus
+{
+	color: lightgreen;
+}
+
+a:link:active, a:visited:active
+{
+	transition: 0.1s color;
+	color: orange;
+	animation: none;
+}
+
+a:link:empty::before, a:visited:empty::before
+{
+	content: attr(href);
+}
+
+@media print
+{
+	a:link, a:visited
+	{
+		color: lightblue;
+	}
+	
+	a[href]::after
+	{
+		content: " (" attr(href) ") ";
+		font-style: normal;
+	}
+}
+
+button
+{
+	-webkit-appearance: none;
+	color: rgba(255, 255, 255, 0.95);
+	padding: 0.5em;
+	border-radius: 0.5em;
+	border: none 0em transparent;
+	margin: 0em;
+	text-transform: uppercase;
+	display: inline-block;
+	user-select: none;
+	transition: 0.4s background;
+	break-inside: avoid;
+}
+
+button:enabled
+{
+	background: lightblue;
+	cursor: pointer;
+}
+
+button:not(:enabled)
+{
+	background: lightgray;
+}
+
+button:enabled:focus
+{
+	background: lightgreen;
+	transition: 0.2s background;
+}
+
+button:enabled:hover
+{
+	background: pink;
+}
+
+button:enabled:active
+{
+	transition: 0.1s background;
+	background: orange;
+}
+
+progress::-webkit-progress-bar
+{
+	background: transparent;
+}
+
+progress
+{
+	-webkit-appearance: none;
+	overflow: hidden;
+	box-sizing: border-box;
+	border-radius: 0.5em;
+	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2);
+	background: white;
+	border: calc(0.5em / 8) solid lightgray;
+	position: relative;
+	height: auto;
+	padding: calc(0.5em * 7 / 8);
+	break-inside: avoid;
+}
+
+progress::before
+{
+	content: "a";
+	opacity: 0;
+}
+
+progress::-webkit-progress-value
+{
+	box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2);
+	height: auto;
+	top: 0em;
+	bottom: 0em;
+	left: 0em;
+	background: violet;
+	position: absolute;
+}
