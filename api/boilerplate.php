@@ -71,12 +71,15 @@
 											<input class="input-inline" type="password" autocomplete="current-password" name="senha" id="login-password" />
 										</p>
 										<p>
-											<button>login</button>
+											<label><input type="checkbox" name="keep" value="true" /> Salvar Login</label>
 										</p>
 										<p>
-											<a href="cadastro.html">não tenho conta</a>
+											<button>login</button>
 										</p>
 									</form>
+									<p>
+										<a href="cadastro.html">não tenho conta</a>
+									</p>
 								</div>
 							</div>
 						</div>

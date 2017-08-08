@@ -414,7 +414,7 @@ button.icon-button:enabled:active,
 #images-sub
 {
 	display: grid;
-	grid-auto-flow: column;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .image-sub img

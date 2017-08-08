@@ -329,20 +329,20 @@ input[type="radio"i]:disabled
 	cursor: default;
 }
 
-input[type="checkbox"i]:enabled:hover,
-input[type="radio"i]:enabled:hover
-{
-	background: hsl(350, 100%, 98%);
-	border-color: hsl(350, 100%, 88%);
-	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2), inset 0em 0em 0.5em 0.5em rgba(255, 192, 203, 0.4);
-}
-
 input[type="checkbox"i]:enabled:focus,
 input[type="radio"i]:enabled:focus
 {
 	border-color: lightgreen;
 	background: hsl(120, 73%, 95%);
 	transition: 0.4s background, 0.2s border, 0.2s box-shadow;
+}
+
+input[type="checkbox"i]:enabled:hover,
+input[type="radio"i]:enabled:hover
+{
+	background: hsl(350, 100%, 98%);
+	border-color: hsl(350, 100%, 88%);
+	box-shadow: inset 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2), inset 0em 0em 0.5em 0.5em rgba(255, 192, 203, 0.4);
 }
 
 input[type="checkbox"i]:enabled:active,
