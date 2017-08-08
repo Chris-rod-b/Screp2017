@@ -15,11 +15,11 @@
 		?>
 			<article>
 				<a href="all.php/<?php echo $url; ?>"><h2>Botton <?php echo ucwords($nome_estampa).' '.ucwords($nome_cor); ?></h2></a>
-				<a href="all.php/<?php echo $url; ?>">
 					<p class="botton-image">
-						<img src="images/botton.svg" alt="imagem do botton" />
+						<a href="all.php/<?php echo $url; ?>">
+							<img src="images/botton.svg" alt="imagem do botton" />
+						</a>
 					</p>
-				</a>
 				<p>
 					Estoque: <?php echo $estoque; ?>
 				</p>
@@ -29,6 +29,12 @@
 						echo '<p>'.$descricao.'</p>';
 					}
 				?>
+				
+				<p>
+					<button type="button" class="icon-button">
+						<img src="images/add.svg" alt="adicionar ao carrinho" />
+					</button>
+				</p>
 			</article>
 		<?php
 	}

@@ -475,9 +475,24 @@ iframe
 {
 	float: left;
 	width: 20%;
+	display: flex;
+	margin: 0em;
 }
 
 .botton-image img
 {
 	width: 100%;
+}
+
+.botton-image ~ p
+{
+	margin: 0em;
+	display: inline;
+}
+
+.botton-image ~ p::before
+{
+	content: "";
+	display: block;
+	margin: 1em 0em 0em;
 }
