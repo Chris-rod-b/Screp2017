@@ -27,11 +27,11 @@
 			<head>
 				<meta charset="utf-8" />
 				<base href="<?php echo dirname($_SERVER['SCRIPT_NAME']); ?>" />
-				<title>screp &mdash; <?php if($cpinfo['subfolder'] || !isset($_SERVER['PATH_INFO'])) echo $cpinfo['name']; else echo 'não encontrado'; ?></title>
+				<title>screp &mdash; <?php if($cpinfo['subfolder'] || empty($_SERVER['PATH_INFO'])) echo $cpinfo['name']; else echo 'não encontrado'; ?></title>
 				<link rel="stylesheet" href="layout.css" />
 				<script src="main.js"></script>
 				<script type="text/plain" id="pagenames"><?php foreach($pages as $pcode=>$pinfo) echo $pcode.'.php::'.$pcode.'.js::'.$pinfo['name'].'::'.$pinfo['subfolder'].';;'; ?></script>
-				<script id="pagescript"<?php if(!isset($_SERVER['PATH_INFO'])) echo ' src="scripts/'.$page.'.js"'; ?>></script>
+				<script id="pagescript"<?php if($cpinfo['subfolder'] || empty($_SERVER['PATH_INFO'])) echo ' src="scripts/'.$page.'.js"'; ?>></script>
 			</head>
 			<body>
 				<script src="compat.js"></script>
@@ -87,14 +87,20 @@
 					<main>
 	<?php
 	
-	include 'psub.php';
-	includep(dirname(__FILE__).'/'.$page.'.php', $cpinfo['subfolder']);
+	if(!($cpinfo['subfolder'] || empty($_SERVER['PATH_INFO'])))
+	{
+		include 'unfound.php';
+	}
+	else
+	{
+		include dirname(__FILE__).'/'.$page.'.php';
+	}
 	
 	global $people;
 	
 	echo '</main><footer><p>';
 	links();
-	echo'</p><p>';
+	echo '</p><p>';
 	
 	$sep = '';
 	foreach($people as list($number, $person))
@@ -103,5 +109,5 @@
 		$sep = ' | ';
 	}
 	
-	echo '</p></footer><p id="back" hidden><a href="#page">voltar ao topo</a></p></div></body></html>';
+	echo '</p></footer></div></body></html>';
 ?>

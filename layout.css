@@ -148,7 +148,7 @@ button.icon-button
 
 .icon-button
 {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 }
 
@@ -495,4 +495,14 @@ iframe
 	content: "";
 	display: block;
 	margin: 1em 0em 0em;
+}
+
+.newproduct-button
+{
+	width: 20%;
+}
+
+.newproduct-button img
+{
+	width: 100%;
 }
