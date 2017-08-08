@@ -470,3 +470,14 @@ iframe
 	transform: translatey(-100%);
 	box-shadow: none;
 }
+
+.botton-image
+{
+	float: left;
+	width: 20%;
+}
+
+.botton-image img
+{
+	width: 100%;
+}

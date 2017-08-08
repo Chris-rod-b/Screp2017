@@ -11,10 +11,24 @@
 		$nome_estampa = $row['nome_estampa'];
 		$nome_cor = $row['nome_cor'];
 		$esgotado = $estoque <= 0;
+		$url = $codigo_estampa.'-'.$codigo_cor;
 		?>
 			<article>
-				<a href="all.php/<?php echo $codigo_estampa.'-'.$codigo_cor; ?>"><h2>Botton <?php echo ucwords($nome_estampa).' '.ucwords($nome_cor); ?></h2></a>
-				
+				<a href="all.php/<?php echo $url; ?>"><h2>Botton <?php echo ucwords($nome_estampa).' '.ucwords($nome_cor); ?></h2></a>
+				<a href="all.php/<?php echo $url; ?>">
+					<p class="botton-image">
+						<img src="images/botton.svg" alt="imagem do botton" />
+					</p>
+				</a>
+				<p>
+					Estoque: <?php echo $estoque; ?>
+				</p>
+				<?php
+					if(!empty($descricao))
+					{
+						echo '<p>'.$descricao.'</p>';
+					}
+				?>
 			</article>
 		<?php
 	}
