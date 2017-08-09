@@ -21,7 +21,7 @@ body
 {
 	margin: 0em auto;
 	max-width: 900px;
-	text-align: justify; 
+	text-align: justify;
 }
 
 body, #main, main, #roulette, #top
@@ -112,8 +112,8 @@ nav::-webkit-scrollbar-track
 	border: 0.25em solid lightblue;
 	border-bottom: 0em none transparent;
 	border-right: 0em none transparent;
-	border-radius: 2em 0em 0em 0em;
-	box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.2);
+	border-radius: 2em 0em 0em;
+	box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.2);
 	transition: 1s box-shadow, 0.4s color, 0.4s border-color;
 	text-align: center;
 }
@@ -270,7 +270,7 @@ button.icon-button:enabled:active,
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	pointer-events: all;
+	pointer-events: unset;
 	border-radius: 2em;
 }
 
