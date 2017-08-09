@@ -479,8 +479,9 @@ iframe
 	margin: 0em;
 }
 
-.botton-image img
+.botton-image *
 {
+	display: block;
 	width: 100%;
 }
 
