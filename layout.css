@@ -363,6 +363,8 @@ button.icon-button:enabled:active,
 	transition: 0.4s box-shadow;
 }
 
+/* comentário para o Gabriel */
+
 .plex-link:focus::after
 {
 	box-shadow: inset 0em 0em 2em lightgreen;
