@@ -81,11 +81,12 @@ document.addEventListener("DOMContentLoaded", ()=>
 				}
 				fetch("api/"+url, {credentials: "same-origin"}).then(response=>
 				{
-					scrollTo(0, 0);
 					if(response.ok)
 					{
 						response.text().then(text=>
 						{
+							scrollTo(0, 0);
+							
 							main.innerHTML = text;
 							
 							if(href === "home.php")
@@ -128,6 +129,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 					}
 					else
 					{
+						scrollTo(0, 0);
 						main.textContent = "";
 						let h1 = document.createElement("h1");
 						h1.textContent = "Erro Desconhecido";
