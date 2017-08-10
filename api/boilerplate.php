@@ -50,7 +50,7 @@
 								<?php
 									links();
 								?>
-								<button type="button" id="p-button" class="icon-button"><img src="images/profile.svg" alt="Seu Perfil" /></button>
+								<button type="button" id="p-button">login</button>
 								<a<?php if($page !== 'cart') echo ' href="cart.php"'; ?> data-href="cart.php" class="icon-button"><img src="images/cart.svg" alt="Carrinho de Compras" /></a>
 							</div>
 						</nav>
