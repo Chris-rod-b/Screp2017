@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 				}
 				fetch("api/"+url, {credentials: "same-origin"}).then(response=>
 				{
+					scrollTo(0, 0);
 					if(response.ok)
 					{
 						response.text().then(text=>
@@ -109,8 +110,6 @@ document.addEventListener("DOMContentLoaded", ()=>
 									a.href = dhref;
 								}
 							}
-							
-							scrollTo(0, 0);
 							
 							if(unfound)
 							{

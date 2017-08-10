@@ -49,7 +49,7 @@
 					</label>
 				</p>
 				<p>
-					<select name="color" data-id="color"></select>
+					<select name="color" data-id="color" required></select>
 				</p>
 				<p>
 					<label data-for="stamp">
@@ -57,7 +57,15 @@
 					</label>
 				</p>
 				<p>
-					<select name="stamp" data-id="stamp"></select>
+					<select name="stamp" data-id="stamp" required></select>
+				</p>
+				<p>
+					<label data-for="stock">
+						Estoque:
+					</label>
+				</p>
+				<p>
+					<input type="number" name="stock" data-id="stock" class="input-block" min="0" step="1" value="1" required />
 				</p>
 				<p>
 					<button>salvar</button>

@@ -81,7 +81,6 @@
 		roulette.addEventListener("pointerenter", enter);
 		roulette.addEventListener("pointerleave", leave);
 		
-		
 		roulette.addEventListener("focusin", enter);
 		roulette.addEventListener("focusout", leave);
 		

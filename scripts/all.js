@@ -11,10 +11,24 @@
 		newbutton.addEventListener("click", ()=>
 		{
 			let fragment = document.importNode(template.content, true);
-			let form = fragment.querySelector("form");
+			
+			let form = fragment.querySelector(".newproduct-form");
+			
 			fragment.querySelector(".cancel").addEventListener("click", ()=>
 			{
-				form.remove();
+				form.animate(
+				[
+					{
+						height: form.getBoundingClientRect().height + "px"
+					},
+					{
+						height: "0px"
+					}
+				],
+				{
+					easing: "ease-in",
+					duration: 300
+				}).addEventListener("finish", ()=>{form.remove();});
 			});
 			
 			for(let input of fragment.querySelectorAll("[data-id]"))
@@ -28,6 +42,21 @@
 			}
 			
 			newp.before(fragment);
+			
+			form.animate(
+			[
+				{
+					height: "0px"
+				},
+				{
+					height: form.getBoundingClientRect().height + "px"
+				}
+			],
+			{
+				easing: "ease-out",
+				duration: 300
+			});
+			
 			cur++;
 		});
 	};
