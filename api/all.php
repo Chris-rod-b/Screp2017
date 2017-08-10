@@ -40,6 +40,33 @@
 		<?php
 	}
 	
+	?>
+		<template id="edit-botton">
+			<form method="post" class="newproduct-form">
+				<p>
+					<label data-for="color">
+						Cor:
+					</label>
+				</p>
+				<p>
+					<select name="color" data-id="color"></select>
+				</p>
+				<p>
+					<label data-for="stamp">
+						Estampa:
+					</label>
+				</p>
+				<p>
+					<select name="stamp" data-id="stamp"></select>
+				</p>
+				<p>
+					<button>salvar</button>
+					<button type="button" class="cancel">cancelar</button>
+				</p>
+			</form>
+		</template>
+	<?php
+	
 	if(empty($_SERVER['PATH_INFO']))
 	{
 		?>
@@ -58,8 +85,8 @@
 					echo '</article>';
 				}
 			?>
-			<p>
-				<button type="button" class="icon-button newproduct-button">
+			<p id="newproduct-p">
+				<button type="button" class="icon-button" id="newproduct-button">
 					<img src="images/new.svg" alt="adicionar produto" />
 				</button>
 			</p>

@@ -270,7 +270,7 @@ button.icon-button:enabled:active,
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	pointer-events: unset;
+	pointer-events: all;
 	border-radius: 2em;
 }
 
@@ -362,8 +362,6 @@ button.icon-button:enabled:active,
 	right: 0em;
 	transition: 0.4s box-shadow;
 }
-
-/* comentário para o Gabriel */
 
 .plex-link:focus::after
 {
@@ -500,12 +498,17 @@ iframe
 	margin: 1em 0em 0em;
 }
 
-.newproduct-button
+#newproduct-button
 {
 	width: 20%;
 }
 
-.newproduct-button img
+#newproduct-button img
 {
 	width: 100%;
+}
+
+.newproduct-form p
+{
+	margin: 1em 0em;
 }
