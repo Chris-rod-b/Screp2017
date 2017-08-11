@@ -87,6 +87,45 @@
 	{
 		?>
 			<h1>Nossos Produtos</h1>
+			<details>
+				<summary>Pesquisa</summary>
+				<form>
+					<p>
+						<label for="search-query">
+							Pesquisar:
+						</label>
+					</p>
+					<p>
+						<input type="search" class="input-block" name="query" id="search-query" required />
+					</p>
+					<p>
+						Cor:
+					</p>
+					<div id="search-colors">
+						<?php
+							foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome, r, g, b FROM cor ORDER BY nome')) as $row)
+							{
+								echo '<p style="background: rgb('.$row['r'].', '.$row['g'].', '.$row['b'].')"><label><input type="checkbox" name="color[]" value="'.$row['codigo'].'" /> '.$row['nome'].'</label></p>';
+							}
+						?>
+					</div>
+					<p>
+						<label for="search-stamp">
+							Estampa:
+						</label>
+					</p>
+					<p>
+						<select multiple name="stamp" id="search-stamp">
+							<?php
+								foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome FROM estampa ORDER BY nome')) as $row)
+								{
+									echo '<option value="'.$row['name'].'">'.$row['nome'].'</option>';
+								}
+							?>
+						</select>
+					</p>
+				</form>
+			</details>
 			<?php
 				foreach(pg_fetch_all(pg_query($connection, 'SELECT botton.estoque, botton.descricao, botton.codigo_estampa, botton.codigo_cor, estampa.nome as nome_estampa, cor.nome as nome_cor FROM botton, estampa, cor WHERE botton.codigo_cor = cor.codigo AND botton.codigo_estampa = estampa.codigo ORDER BY estampa.nome, cor.nome')) as $row)
 				{

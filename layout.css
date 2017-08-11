@@ -512,3 +512,28 @@ iframe
 {
 	margin: 1em 0em;
 }
+
+#search-colors
+{
+	border-radius: 0.5em;
+	max-width: 85vh;
+}
+
+#search-colors p
+{
+	margin: 0em;
+}
+
+#search-colors label
+{
+	display: block;
+	padding: 0.5em;
+	cursor: pointer;
+}
+
+#search-colors label
+{
+	display: block;
+	padding: 0.5em;
+	cursor: pointer;
+}
