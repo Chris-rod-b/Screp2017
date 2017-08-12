@@ -513,10 +513,10 @@ iframe
 	margin: 1em 0em;
 }
 
-#search-colors
+#search-colors > div
 {
 	border-radius: 0.5em;
-	max-width: 85vh;
+	border: calc(1em / 16) solid black;
 }
 
 #search-colors p
@@ -527,13 +527,13 @@ iframe
 #search-colors label
 {
 	display: block;
-	padding: 0.5em;
+	padding: 0.5em 1em;
 	cursor: pointer;
 }
 
-#search-colors label
+#search-query
 {
 	display: block;
-	padding: 0.5em;
-	cursor: pointer;
+	width: 100%;
 }
+

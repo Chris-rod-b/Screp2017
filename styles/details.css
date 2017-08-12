@@ -5,7 +5,7 @@ details
 	background: #FAFAFA;
 	margin: 1em 0em;
 	margin: logical 1em 0em;
-	padding: 0em 0.5em;
+	padding: 0em 1em;
 	padding: logical 0em 1em;
 	border: calc(0.5em / 8) solid black;
 	border-radius: 0.5em;
@@ -14,8 +14,8 @@ details
 
 summary
 {
-	margin: 0em -0.5em;
-	margin: logical 0em -0.5em;
+	margin: 0em -1em;
+	margin: logical 0em -1em;
 	padding: 0.5em;
 	padding: logical 0.5em;
 	cursor: pointer;

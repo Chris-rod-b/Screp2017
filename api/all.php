@@ -88,7 +88,7 @@
 		?>
 			<h1>Nossos Produtos</h1>
 			<details>
-				<summary>Pesquisa</summary>
+				<summary>Filtros</summary>
 				<form>
 					<p>
 						<label for="search-query">
@@ -98,17 +98,44 @@
 					<p>
 						<input type="search" class="input-block" name="query" id="search-query" required />
 					</p>
-					<p>
-						Cor:
-					</p>
-					<div id="search-colors">
-						<?php
-							foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome, r, g, b FROM cor ORDER BY nome')) as $row)
-							{
-								echo '<p style="background: rgb('.$row['r'].', '.$row['g'].', '.$row['b'].')"><label><input type="checkbox" name="color[]" value="'.$row['codigo'].'" /> '.$row['nome'].'</label></p>';
-							}
-						?>
-					</div>
+					<fieldset id="search-colors">
+						<legend>Cor</legend>
+						<div>
+							<?php
+								foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome, r, g, b FROM cor ORDER BY nome')) as $row)
+								{
+									$r = $row['r'];
+									$g = $row['g'];
+									$b = $row['b'];
+									
+									$cs = ['r'=>$r, 'g'=>$g, 'b'=>$b];
+									
+									foreach($cs as &$c)
+									{
+										$c = $c / 255;
+										if($c <= 0.04045)
+										{
+											$c = $c/12.92;
+										}
+										else
+										{
+											$c = (($c+0.055)/1.055) ^ 2.4;
+										}
+									}
+									$l = 0.2126 * $cs['r'] + 0.7152 * $cs['g'] + 0.0722 * $cs['b'];
+									if(0.179 < $l)
+									{
+										$f = 'rgba(0, 0, 0, 0.85)';
+									}
+									else
+									{
+										$f = 'rgba(255, 255, 255, 0.85)';
+									}
+									echo '<p style="background: rgb('.$r.', '.$g.', '.$b.'); color: '.$f.';"><label><input type="checkbox" name="color[]" value="'.$row['codigo'].'" /> '.ucfirst($row['nome']).'</label></p>';
+								}
+							?>
+						</div>
+					</fieldset>
 					<p>
 						<label for="search-stamp">
 							Estampa:

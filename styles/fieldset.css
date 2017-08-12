@@ -8,6 +8,7 @@ fieldset
 	border: calc(0.5em / 8) solid gray;
 	border-radius: 1em;
 	break-inside: avoid;
+	overflow: visible;
 }
 
 fieldset legend + *
