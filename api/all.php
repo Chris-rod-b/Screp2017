@@ -7,8 +7,7 @@
 		$descricao = $row['descricao'];
 		$codigo_estampa = $row['codigo_estampa'];
 		$codigo_cor = $row['codigo_cor'];
-		$nome_estampa = $row['nome_estampa'];
-		$nome_cor = $row['nome_cor'];
+		$nome = $row['nome'];
 		if($link)
 		{
 			$href = ' href="all.php/'.$codigo_estampa.'-'.$codigo_cor.'"';
@@ -17,7 +16,7 @@
 		?>
 			<a<?php echo $href; ?>>
 				<h<?php echo $h; ?>>
-					Botton <?php echo ucwords($nome_estampa).' '.ucwords($nome_cor); ?>
+					Botton <?php echo ucwords($nome); ?>
 				</h<?php echo $h; ?>>
 			</a>
 			<p class="botton-image">
@@ -85,88 +84,104 @@
 	
 	if(empty($_SERVER['PATH_INFO']))
 	{
+		$query = $_GET['query'];
 		?>
 			<h1>Nossos Produtos</h1>
-			<details>
-				<summary>Filtros</summary>
-				<form>
-					<p>
-						<label for="search-query">
-							Pesquisar:
-						</label>
-					</p>
-					<p>
-						<input type="search" class="input-block" name="query" id="search-query" required />
-					</p>
-					<fieldset id="search-colors">
-						<legend>Cor</legend>
-						<div>
-							<?php
-								foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome, r, g, b FROM cor ORDER BY nome')) as $row)
+			<form>
+				<p>
+					<label>
+						Termos de pesquisa: <input type="search" class="input-block" name="query"<?php if(isset($query)) echo ' value="'.$query.'"'; ?> />
+					</label>
+					<button>pesquisar</button>
+				</p>
+				<?php
+					/*
+				?>
+				<fieldset id="search-colors">
+					<legend>Cor</legend>
+					<div>
+						<?php
+							foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome, r, g, b FROM cor ORDER BY nome')) as $row)
+							{
+								$r = $row['r'];
+								$g = $row['g'];
+								$b = $row['b'];
+								
+								$cs = ['r'=>$r, 'g'=>$g, 'b'=>$b];
+								
+								foreach($cs as &$c)
 								{
-									$r = $row['r'];
-									$g = $row['g'];
-									$b = $row['b'];
-									
-									$cs = ['r'=>$r, 'g'=>$g, 'b'=>$b];
-									
-									foreach($cs as &$c)
+									$c = $c / 255;
+									if($c <= 0.04045)
 									{
-										$c = $c / 255;
-										if($c <= 0.04045)
-										{
-											$c = $c/12.92;
-										}
-										else
-										{
-											$c = (($c+0.055)/1.055) ^ 2.4;
-										}
-									}
-									$l = 0.2126 * $cs['r'] + 0.7152 * $cs['g'] + 0.0722 * $cs['b'];
-									if(0.179 < $l)
-									{
-										$f = 'rgba(0, 0, 0, 0.85)';
+										$c = $c/12.92;
 									}
 									else
 									{
-										$f = 'rgba(255, 255, 255, 0.85)';
+										$c = (($c+0.055)/1.055) ^ 2.4;
 									}
-									echo '<p style="background: rgb('.$r.', '.$g.', '.$b.'); color: '.$f.';"><label><input type="checkbox" name="color[]" value="'.$row['codigo'].'" /> '.ucfirst($row['nome']).'</label></p>';
+								}
+								$l = 0.2126 * $cs['r'] + 0.7152 * $cs['g'] + 0.0722 * $cs['b'];
+								if(0.179 < $l)
+								{
+									$f = 'rgba(0, 0, 0, 0.85)';
+								}
+								else
+								{
+									$f = 'rgba(255, 255, 255, 0.85)';
+								}
+								echo '<p style="background: rgb('.$r.', '.$g.', '.$b.'); color: '.$f.';"><label><input type="checkbox" name="color[]" value="'.$row['codigo'].'" /> '.ucfirst($row['nome']).'</label></p>';
+							}
+						?>
+					</div>
+				</fieldset>
+				<p>
+					<fieldset>
+						<legend>Estampa</legend>
+						<div>
+							<?php
+								foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome FROM estampa ORDER BY nome')) as $row)
+								{
+									echo '<p><label><input type="checkbox" value="'.$row['codigo'].'" name="stamp[]"> '.ucfirst($row['nome']).'</label></p>';
 								}
 							?>
 						</div>
 					</fieldset>
-					<p>
-						<label for="search-stamp">
-							Estampa:
-						</label>
-					</p>
-					<p>
-						<select multiple name="stamp" id="search-stamp">
-							<?php
-								foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome FROM estampa ORDER BY nome')) as $row)
-								{
-									echo '<option value="'.$row['name'].'">'.$row['nome'].'</option>';
-								}
-							?>
-						</select>
-					</p>
-				</form>
-			</details>
-			<?php
-				foreach(pg_fetch_all(pg_query($connection, 'SELECT botton.estoque, botton.descricao, botton.codigo_estampa, botton.codigo_cor, estampa.nome as nome_estampa, cor.nome as nome_cor FROM botton, estampa, cor WHERE botton.codigo_cor = cor.codigo AND botton.codigo_estampa = estampa.codigo ORDER BY estampa.nome, cor.nome')) as $row)
-				{
-					echo '<article class="botton">';
-					botton_body($row, true, 2);
-					echo '</article>';
-				}
-			?>
-			<p id="newproduct-p">
-				<button type="button" class="icon-button" id="newproduct-button">
-					<img src="images/new.svg" alt="adicionar produto" />
-				</button>
-			</p>
+				</p>
+				<?php
+					*/
+				?>
+			</form>
 		<?php
+		
+		$rows = pg_fetch_all(pg_query_params($connection, 'SELECT botton.estoque, botton.descricao, estampa.codigo AS codigo_estampa, cor.codigo AS codigo_cor, (estampa.nome || '."' '".' || cor.nome) AS nome FROM botton, cor, estampa WHERE botton.codigo_cor = cor.codigo AND botton.codigo_estampa = estampa.codigo AND ($1::TEXT IS NULL OR $1 = '."''".' OR EXISTS(SELECT * FROM (SELECT UNNEST(ARRAY_REMOVE(STRING_TO_ARRAY($1, '."' '".'), '."''".')) AS c) AS q, (SELECT UNNEST((STRING_TO_ARRAY(estampa.nome, '."' '".') || STRING_TO_ARRAY(cor.nome, '."' '".'))) AS c) AS d WHERE LOWER(q.c) = LOWER(d.c))) ORDER BY estampa.nome, cor.nome', [$query]));
+		
+		if(empty($rows))
+		{
+			?>
+				<p>Nenhum produto encontrado.</p>
+			<?php
+		}
+		else
+		{
+			foreach($rows as $row)
+			{
+				echo '<article class="botton">';
+				botton_body($row, true, 2);
+				echo '</article>';
+			}
+		}
+		
+		if(empty($query))
+		{
+			?>
+				<p id="newproduct-p">
+					<button type="button" class="icon-button" id="newproduct-button">
+						<img src="images/new.svg" alt="adicionar produto" />
+					</button>
+				</p>
+			<?php
+		}
 	}
 	else
 	{
