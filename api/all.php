@@ -1,51 +1,6 @@
 <?php
-	include 'connect.php';
-	
-	function botton_body($row, $link = true, $h = 1)
-	{
-		$estoque = $row['estoque'];
-		$descricao = $row['descricao'];
-		$codigo_estampa = $row['codigo_estampa'];
-		$codigo_cor = $row['codigo_cor'];
-		$nome = $row['nome'];
-		if($link)
-		{
-			$href = ' href="all.php/'.$codigo_estampa.'-'.$codigo_cor.'"';
-		}
-		// $esgotado = $estoque <= 0;
-		?>
-			<a<?php echo $href; ?>>
-				<h<?php echo $h; ?>>
-					Botton <?php echo ucwords($nome); ?>
-				</h<?php echo $h; ?>>
-			</a>
-			<p class="botton-image">
-				<a<?php echo $href; ?>>
-					<img src="images/botton.svg" alt="imagem do botton" />
-				</a>
-			</p>
-			<p>
-				Estoque: <?php echo $estoque; ?>
-			</p>
-			<?php
-				if(!empty($descricao))
-				{
-					echo '<p>'.$descricao.'</p>';
-				}
-			?>
-			
-			<p>
-				<button type="button" class="icon-button">
-					<img src="images/add.svg" alt="adicionar ao carrinho" />
-				</button>
-			</p>
-			<p>
-				<button class="icon-button">
-					<img src="images/edit.svg" alt="editar item" />
-				</button>
-			</p>
-		<?php
-	}
+	include_once 'connect.php';
+	include_once 'botton_body.php';
 	
 	?>
 		<template id="edit-botton">
@@ -154,23 +109,7 @@
 			</form>
 		<?php
 		
-		$rows = pg_fetch_all(pg_query_params($connection, 'SELECT botton.estoque, botton.descricao, estampa.codigo AS codigo_estampa, cor.codigo AS codigo_cor, (estampa.nome || '."' '".' || cor.nome) AS nome FROM botton, cor, estampa WHERE botton.codigo_cor = cor.codigo AND botton.codigo_estampa = estampa.codigo AND ($1::TEXT IS NULL OR $1 = '."''".' OR EXISTS(SELECT * FROM (SELECT UNNEST(ARRAY_REMOVE(STRING_TO_ARRAY($1, '."' '".'), '."''".')) AS c) AS q, (SELECT UNNEST((STRING_TO_ARRAY(estampa.nome, '."' '".') || STRING_TO_ARRAY(cor.nome, '."' '".'))) AS c) AS d WHERE LOWER(q.c) = LOWER(d.c))) ORDER BY estampa.nome, cor.nome', [$query]));
-		
-		if(empty($rows))
-		{
-			?>
-				<p>Nenhum produto encontrado.</p>
-			<?php
-		}
-		else
-		{
-			foreach($rows as $row)
-			{
-				echo '<article class="botton">';
-				botton_body($row, true, 2);
-				echo '</article>';
-			}
-		}
+		include 'results.php';
 		
 		if(empty($query))
 		{
