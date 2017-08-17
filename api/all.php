@@ -39,7 +39,6 @@
 	
 	if(empty($_SERVER['PATH_INFO']))
 	{
-		$query = $_GET['query'];
 		?>
 			<h1>Nossos Produtos</h1>
 			<form>
