@@ -44,7 +44,7 @@
 			<form>
 				<p>
 					<label>
-						Termos de pesquisa: <input type="search" class="input-block" name="query"<?php if(isset($query)) echo ' value="'.$query.'"'; ?> />
+						Termos de pesquisa: <input type="search" class="input-block" name="query"<?php if(isset($_GET['query'])) echo ' value="'.$query.'"'; ?> />
 					</label>
 					<button>pesquisar</button>
 				</p>
