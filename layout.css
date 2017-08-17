@@ -21,7 +21,6 @@ body
 {
 	margin: 0em auto;
 	max-width: 900px;
-	text-align: justify;
 }
 
 body, #main, main, #roulette, #top
@@ -506,11 +505,6 @@ iframe
 #newproduct-button img
 {
 	width: 100%;
-}
-
-.newproduct-form p
-{
-	margin: 1em 0em;
 }
 
 /*

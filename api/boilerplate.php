@@ -1,5 +1,5 @@
 <?php
-	$pages = array('home'=>array('name'=>'home'), 'all'=>array('name'=>'produtos', 'subfolder'=>true), 'design'=>array('name'=>'design'), 'sitemap'=>array('name'=>'mapa'));
+	$pages = array('home'=>array('name'=>'home', 'nav'=>true), 'all'=>array('name'=>'produtos', 'subfolder'=>true, 'nav'=>true), 'design'=>array('name'=>'design', 'nav'=>true), 'sitemap'=>array('name'=>'mapa', 'nav'=>true), 'edit'=>array('name'=>'alteração/inclusão'));
 	$page = basename($_SERVER['SCRIPT_NAME'], '.php');
 	
 	$people = array(array('13', 'Sabrina'), array('02', 'Christian'), array('08', 'José Rogério'), array('14', 'Elias'), array('12', 'Pedro'));
@@ -10,12 +10,15 @@
 		global $page;
 		foreach($pages as $pcode=>$pinfo)
 		{
-			echo '<a';
-			if(isset($_SERVER['PATH_INFO']) || $page !== $pcode)
+			if($pinfo['nav'])
 			{
-				echo ' href="'.$pcode.'.php"';
+				echo '<a';
+				if(isset($_SERVER['PATH_INFO']) || $page !== $pcode)
+				{
+					echo ' href="'.$pcode.'.php"';
+				}
+				echo ' data-href="'.$pcode.'.php">'.$pinfo['name'].'</a> ';
 			}
-			echo ' data-href="'.$pcode.'.php">'.$pinfo['name'].'</a> ';
 		}
 	}
 	

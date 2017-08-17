@@ -38,9 +38,9 @@
 				</button>
 			</p>
 			<p>
-				<button class="icon-button">
+				<a href="edit.php?<?php echo 'stamp='.$codigo_estampa.'&color='.$codigo_cor; ?>" class="icon-button">
 					<img src="images/edit.svg" alt="editar item" />
-				</button>
+				</a>
 			</p>
 		<?php
 	}
