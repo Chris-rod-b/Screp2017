@@ -11,7 +11,14 @@
 					</label>
 				</p>
 				<p>
-					<select name="color" data-id="color" required></select>
+					<select name="color" data-id="color" required>
+						<?php
+							foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome FROM cor ORDER BY nome')) as $row)
+							{
+								echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
+							}
+						?>
+					</select>
 				</p>
 				<p>
 					<label data-for="stamp">
@@ -19,7 +26,14 @@
 					</label>
 				</p>
 				<p>
-					<select name="stamp" data-id="stamp" required></select>
+					<select name="stamp" data-id="stamp" required>
+						<?php
+							foreach(pg_fetch_all(pg_query($connection, 'SELECT codigo, nome FROM estampa ORDER BY nome')) as $row)
+							{
+								echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
+							}
+						?>
+					</select>
 				</p>
 				<p>
 					<label data-for="stock">
@@ -30,8 +44,16 @@
 					<input type="number" name="stock" data-id="stock" class="input-block" min="0" step="1" value="1" required />
 				</p>
 				<p>
-					<button>salvar</button>
-					<button type="button" class="cancel">cancelar</button>
+					<label data-for="description">
+						Descrição:
+					</label>
+				</p>
+				<p>
+					<textarea name="description" data-id="description"></textarea>
+				</p>
+				<p>
+					<button class="edit-botton-save">salvar</button>
+					<button type="button" class="edit-botton-cancel">cancelar</button>
 				</p>
 			</form>
 		</template>
@@ -39,12 +61,13 @@
 	
 	if(empty($_SERVER['PATH_INFO']))
 	{
+		$query = $_GET['query'];
 		?>
 			<h1>Nossos Produtos</h1>
 			<form>
 				<p>
 					<label>
-						Termos de pesquisa: <input type="search" class="input-block" name="query"<?php if(isset($_GET['query'])) echo ' value="'.$query.'"'; ?> />
+						Termos de pesquisa: <input type="search" class="input-block" name="query"<?php if(isset($query)) echo ' value="'.htmlspecialchars($query).'"'; ?> />
 					</label>
 					<button>pesquisar</button>
 				</p>

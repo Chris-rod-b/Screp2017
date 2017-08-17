@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 		for(let current = target; current; current = current.parentNode)
 		{
 			let href;
-			if(current.localName === "a" && (href = current.getAttribute("href")) && /^[^\/]*?.php(\/.*$)?/.test(href))
+			if(current.localName === "a" && (href = current.getAttribute("href")) && /^[^\/]*?\.php(\/.*)?$/.test(href))
 			{
 				let pagename = pagenames[href.split("/")[0]];
 				let url;

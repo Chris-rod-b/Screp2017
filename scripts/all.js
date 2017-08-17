@@ -16,7 +16,7 @@
 				
 				let form = fragment.querySelector(".newproduct-form");
 				
-				fragment.querySelector(".cancel").addEventListener("click", ()=>
+				fragment.querySelector(".edit-botton-cancel").addEventListener("click", ()=>
 				{
 					form.animate(
 					[
@@ -76,7 +76,6 @@
 					let data = new URLSearchParams(window.location.search);
 					data.set("offset", offset);
 					next.disabled = true;
-					console.log(data.toString());
 					fetch("api/results.php?" + data, {credentials: "same-origin"}).then(response=>
 					{
 						if(response.ok)

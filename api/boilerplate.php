@@ -21,12 +21,18 @@
 	
 	$cpinfo = $pages[$page];
 	
+	$base = dirname($_SERVER['SCRIPT_NAME']);
+	if(substr($base, -1) !== '/')
+	{
+		$base .= '/';
+	}
+	
 	?>
 		<!doctype html>
 		<html lang="pt" id="page">
 			<head>
 				<meta charset="utf-8" />
-				<base href="<?php echo dirname($_SERVER['SCRIPT_NAME']); ?>" />
+				<base href="<?php echo $base; ?>" />
 				<title>screp &mdash; <?php if($cpinfo['subfolder'] || empty($_SERVER['PATH_INFO'])) echo $cpinfo['name']; else echo 'não encontrado'; ?></title>
 				<link rel="stylesheet" href="layout.css" />
 				<script src="main.js"></script>

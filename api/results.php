@@ -7,7 +7,7 @@
 	if(empty($rows))
 	{
 		?>
-			<p>Final dos resultados de pesquisa.</p>
+			<p>Fim dos resultados de pesquisa.</p>
 		<?php
 	}
 	else
