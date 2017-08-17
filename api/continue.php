@@ -39,7 +39,7 @@
 	</label>
 </p>
 <p>
-	<textarea name="description" id="description"<?php if(isset($row)) echo ' value="'.$row['descricao'].'"'?>></textarea>
+	<textarea name="description" id="description"><?php if(isset($row)) echo htmlspecialchars($row['descricao']); ?></textarea>
 </p>
 <p>
 	<button class="edit-botton-save">salvar</button>
