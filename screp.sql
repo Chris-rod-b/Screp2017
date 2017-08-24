@@ -17,7 +17,7 @@ CREATE TABLE usuario
 
 CREATE TABLE estampa
 (
-	codigo CHARACTER VARYING NOT NULL PRIMARY KEY,
+	codigo SERIAL NOT NULL PRIMARY KEY,
 	nome CHARACTER VARYING NOT NULL
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE cor
 	g INTEGER NOT NULL,
 	b INTEGER NOT NULL,
 	nome CHARACTER VARYING NOT NULL,
-	codigo CHARACTER VARYING NOT NULL PRIMARY KEY,
+	codigo SERIAL NOT NULL PRIMARY KEY,
 	UNIQUE (r, g, b)
 );
 
@@ -35,73 +35,58 @@ CREATE TABLE botton
 (
 	estoque INTEGER NOT NULL DEFAULT 1,
 	descricao CHARACTER VARYING NOT NULL DEFAULT '',
-	codigo_estampa CHARACTER VARYING NOT NULL REFERENCES estampa,
-	codigo_cor CHARACTER VARYING NOT NULL REFERENCES cor,
+	codigo_estampa INTEGER NOT NULL REFERENCES estampa (codigo),
+	codigo_cor INTEGER NOT NULL REFERENCES cor (codigo),
 	excluido BOOLEAN NOT NULL DEFAULT FALSE,
-	PRIMARY KEY (codigo_estampa, codigo_cor)
+	preco NUMERIC NOT NULL,
+	codigo SERIAL NOT NULL PRIMARY KEY,
+	UNIQUE (codigo_estampa, codigo_cor)
 );
 
 CREATE TABLE venda
 (
-	login_usuario CHARACTER VARYING(50) NOT NULL REFERENCES usuario,
+	login_usuario CHARACTER VARYING(50) NOT NULL REFERENCES usuario (login),
 	concretizacao TIMESTAMP,
-	PRIMARY KEY (login_usuario, concretizacao)
+	codigo SERIAL NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE item
 (
-	codigo_estampa_botton CHARACTER VARYING NOT NULL,
+	codigo_venda INTEGER NOT NULL REFERENCES venda (codigo),
+	codigo_botton INTEGER NOT NULL REFERENCES botton (codigo),
+	preco_botton INTEGER NOT NULL,
 	quantidade INTEGER NOT NULL,
-	login_usuario_venda CHARACTER VARYING NOT NULL,
-	concretizacao_venda TIMESTAMP,
-	codigo_cor_botton CHARACTER VARYING NOT NULL,
-	FOREIGN KEY (login_usuario_venda, concretizacao_venda) REFERENCES venda (login_usuario, concretizacao),
-	FOREIGN KEY (codigo_estampa_botton, codigo_cor_botton) REFERENCES botton (codigo_estampa, codigo_cor),
-	PRIMARY KEY (codigo_estampa_botton, codigo_cor_botton, login_usuario_venda)
+	PRIMARY KEY (codigo_venda, codigo_botton)
 );
 
 CREATE TABLE cliente
 (
-	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario,
-	nome CHARACTER VARYING(100) NOT NULL,
-	cpf CHARACTER(14),
+	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario (login),
+	nome CHARACTER VARYING(60) NOT NULL,
+	sobrenome CHARACTER VARYING(60) NOT NULL,
+	cpf CHARACTER(14) NOT NULL,
 	rg CHARACTER(12),
-	endereco CHARACTER VARYING(120),
-	imagem CHARACTER VARYING(30) NOT NULL
+	endereco CHARACTER VARYING(120) NOT NULL,
+	cidade CHARACTER VARYING(50) NOT NULL,
+	estado CHARACTER(2) NOT NULL,
+	cep CHARACTER(9) NOT NULL
 );
 
 CREATE TABLE admin
 (
-	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario
+	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario (login)
 );
 
 INSERT INTO cor
-	(codigo, r, g, b, nome)
+	(r, g, b, nome)
 	VALUES
-	('preto', 0, 0, 0, 'preto'),
-	('azul', 0, 0, 255, 'azul'),
-	('lima', 0, 255, 0, 'lima'),
-	('aqua', 0, 255, 255, 'aqua'),
-	('vermelho', 255, 0, 0, 'vermelho'),
-	('magenta', 255, 0, 255, 'magenta'),
-	('amarelo', 255, 255, 0, 'amarelo'),
-	('branco', 255, 255, 255, 'branco');
+	(0, 0, 0, 'preto'),
+	(0, 0, 255, 'azul'),
+	(0, 255, 0, 'lima'),
+	(0, 255, 255, 'aqua'),
+	(255, 0, 0, 'vermelho'),
+	(255, 0, 255, 'magenta'),
+	(255, 255, 0, 'amarelo'),
+	(255, 255, 255, 'branco');
 
-INSERT INTO estampa
-	(codigo, nome)
-	VALUES
-	('bob_esponja', 'Bob Esponja'),
-	('minion', 'minion'),
-	('superman', 'Superman'),
-	('batman', 'Batman');
-
-INSERT INTO botton
-	(codigo_estampa, codigo_cor)
-	VALUES
-	('bob_esponja', 'amarelo'),
-	('minion', 'amarelo'),
-	('batman', 'preto'),
-	('superman', 'vermelho'),
-	('superman', 'azul'),
-	('superman', 'branco'),
-	('superman', 'preto');
+INSERT INTO estampa (nome) VALUES ('Bob Esponja'), ('minion'), ('Superman'), ('Batman');

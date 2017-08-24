@@ -17,7 +17,7 @@
 	
 	if(isset($_POST['new']))
 	{
-		$sql = 'INSERT INTO botton (codigo_estampa, codigo_cor, descricao, estoque) VALUES ($1, $2, $3, $4)';
+		$sql = 'INSERT INTO botton (codigo_estampa, codigo_cor, descricao, estoque, preco) VALUES ($1, $2, $3, $4, 5)';
 	}
 	else
 	{
