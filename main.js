@@ -38,20 +38,18 @@ document.addEventListener("DOMContentLoaded", ()=>
 	update();
 	
 	let pbutton = document.querySelector("#p-button");
-	let login = profile.querySelector("#login");
-	if(login)
+	pbutton.addEventListener("click", ()=>
 	{
-		let username = login["username"];
-		pbutton.addEventListener("click", ()=>
+		if(!profile.hidden)
 		{
-			if(!profile.hidden)
+			let login = profile.querySelector("#login");
+			if(login)
 			{
 				login.reset();
-				// username.focus();
 			}
-			update();
-		}, {capture: true});
-	}
+		}
+		update();
+	}, {capture: true});
 	
 	let big = document.querySelector("header a");
 	
@@ -172,17 +170,23 @@ document.addEventListener("DOMContentLoaded", ()=>
 		}
 	}, {capture: true});
 	
-	/*
-	let search = document.querySelector("#search");
-	let searchButton = search.querySelector("#search-button");
-	let q = search.querySelector('[name="q"]');
-	searchButton.addEventListener("click", event=>
+	window.zx_login = name =>
 	{
-		if(!q.value)
+		let profile = document.querySelector("#profile");
+		profile.textContent = "";
+		let button = document.querySelector("#p-button");
+		button.textContent = name;
+		fetch("api/profile.php", {credentials: "same-origin"}).then(response=>
 		{
-			q.focus();
-			event.preventDefault();
-		}
-	});
-	*/
+			if(response.ok)
+			{
+				response.text().then(text=>
+				{
+					profile.innerHTML = text;
+				});
+			}
+		});
+		
+		window.zx_logout = ()=>login("login");
+	};
 });

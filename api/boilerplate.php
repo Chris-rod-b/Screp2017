@@ -1,5 +1,5 @@
 <?php
-	$pages = array('home'=>array('name'=>'home', 'nav'=>true), 'all'=>array('name'=>'produtos', 'subfolder'=>true, 'nav'=>true), 'design'=>array('name'=>'design', 'nav'=>true), 'sitemap'=>array('name'=>'mapa', 'nav'=>true), 'edit'=>array('name'=>'alteração/inclusão'));
+	$pages = array('home'=>array('name'=>'home', 'nav'=>true), 'all'=>array('name'=>'produtos', 'subfolder'=>true, 'nav'=>true), 'design'=>array('name'=>'design', 'nav'=>true), 'sitemap'=>array('name'=>'mapa', 'nav'=>true), 'edit'=>array('name'=>'alteração/inclusão'), 'sign-up'=>array('name'=>'cadastro'));
 	$page = basename($_SERVER['SCRIPT_NAME'], '.php');
 	
 	$people = array(array('13', 'Sabrina'), array('02', 'Christian'), array('08', 'José Rogério'), array('14', 'Elias'), array('12', 'Pedro'));
@@ -47,48 +47,29 @@
 				<div id="main">
 					<header>
 						<a<?php if($page !== 'home') echo ' href="home.php"'; ?>>
-							<img src="images/screp.svg" width="100%" alt="Logo Screp" />
+							<img src="images/screp.png" width="100%" alt="Logo Screp" />
 						</a>
 					</header>
 					<div id="top">
 						<nav>
 							<a<?php if($page !== 'home') echo ' href="home.php"'; ?> id="minilogo" hidden>
-								<img src="images/screp.svg" alt="Mini Logo Screp" />
+								<img src="images/sc_screp.png" alt="Mini Logo Screp" />
 							</a>
 							<div id="links">
 								<?php
 									links();
+									include_once 'user.php';
 								?>
-								<button type="button" id="p-button">login</button>
+								<button type="button" id="p-button"><?php if($nome=$user_login_row['nome']) echo htmlspecialchars($nome); else echo 'login'; ?></button>
 								<a<?php if($page !== 'cart') echo ' href="cart.php"'; ?> data-href="cart.php" class="icon-button"><img src="images/cart.svg" alt="Carrinho de Compras" /></a>
 							</div>
 						</nav>
 						<div id="profile-wrap-wrap" hidden>
 							<div id="profile-wrap">
-								<div id="profile" method="post">
-									<form method="post" id="login">
-										<p>
-											<label for="login-username">User:</label>
-										</p>
-										<p>
-											<input class="input-inline" autocomplete="username" name="username" id="login-username" />
-										</p>
-										<p>
-											<label for="login-password">Senha:</label>
-										</p>
-										<p>
-											<input class="input-inline" type="password" autocomplete="current-password" name="senha" id="login-password" />
-										</p>
-										<p>
-											<label><input type="checkbox" name="keep" value="true" /> Salvar Login</label>
-										</p>
-										<p>
-											<button>login</button>
-										</p>
-									</form>
-									<p>
-										<a href="cadastro.html">não tenho conta</a>
-									</p>
+								<div id="profile">
+									<?php
+										include 'profile.php';
+									?>
 								</div>
 							</div>
 						</div>

@@ -34,7 +34,7 @@ nav
 	margin: 2em -2em 0em;
 	display: flex;
 	align-items: center;
-	padding: 2em 0em;
+	padding: 1em 0em;
 	overflow: auto;
 }
 
@@ -64,15 +64,15 @@ nav::-webkit-scrollbar-track
 #minilogo
 {
 	transition: 0.5s margin;
-	width: 7em;
+	width: 6em;
 	display: flex !important;
 	align-items: center;
-	min-width: 7em;
+	min-width: 6em;
 }
 
 #minilogo[hidden]
 {
-	margin: 0em 0em 0em -7em;
+	margin: 0em 0em 0em -6em;
 }
 
 #minilogo img
@@ -532,3 +532,14 @@ iframe
 	width: 100%;
 }
 */
+
+a.link-front
+{
+	color: unset;
+}
+
+a.link-front:hover
+{
+	animation: none;
+	color: hsl(350, 100%, 70%);
+}

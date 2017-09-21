@@ -12,6 +12,7 @@ table
 table, thead, tbody, tfoot, tr, th, td, caption
 {
 	border: calc(0.5em / 8) solid black;
+	overflow: visible;
 }
 
 caption
