@@ -4,6 +4,7 @@
 	{
 		?>
 			<p>Você está logado como <?php echo $user_login_row['nome'].' '.$user_login_row['sobrenome'].' ('.$user_login_row['login'].')'; ?>.</p>
+			<p><button id="logout-button">logout</button></p>
 		<?php
 	}
 	else
@@ -23,12 +24,8 @@
 					<input class="input-inline" type="password" autocomplete="current-password" name="senha" id="login-password" />
 				</p>
 				<p>
-					<label><input type="checkbox" name="keep" value="true" /> Salvar Login</label>
-				</p>
-				<p>
 					<button>login</button>
 				</p>
-				<script src="scripts/login.js"></script>
 			</form>
 			<p>
 				<a href="sign-up.php">não tenho conta</a>

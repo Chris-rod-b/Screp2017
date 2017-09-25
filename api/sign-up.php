@@ -34,6 +34,10 @@
 		<input id="surname" class="input-block" name="sobrenome" required />
 	</p>
 	
+	<fieldset>
+		<legend>Endereço</legend>
+	</fieldset>
+	
 	<p>
 		<label for="address">Endereço*:</label>
 	</p>

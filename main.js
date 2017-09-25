@@ -170,10 +170,42 @@ document.addEventListener("DOMContentLoaded", ()=>
 		}
 	}, {capture: true});
 	
+	let innerProfile = profile.querySelector("#profile");
+	
+	let initprofile = () =>
+	{
+		let loginform = innerProfile.querySelector("#login");
+		if(loginform)
+		{
+			loginform.addEventListener("submit", event=>
+			{
+				event.preventDefault();
+				let formdata = new FormData(loginform);
+				fetch("api/login.php?" + new URLSearchParams(formdata), {credentials: "same-origin"}).then(response=>
+				{
+					if(response.ok)
+					{
+						response.text().then(text=>
+						{
+							zx_login(text);
+						});
+					}
+				});
+			});
+		}
+		else
+		{
+			let logout = profile.querySelector("#logout-button");
+			logout.addEventListener("click", e=>
+			{
+				zx_logout();
+			});
+		}
+	};
+	
 	window.zx_login = name =>
 	{
-		let profile = document.querySelector("#profile");
-		profile.textContent = "";
+		innerProfile.textContent = "";
 		let button = document.querySelector("#p-button");
 		button.textContent = name;
 		fetch("api/profile.php", {credentials: "same-origin"}).then(response=>
@@ -182,11 +214,23 @@ document.addEventListener("DOMContentLoaded", ()=>
 			{
 				response.text().then(text=>
 				{
-					profile.innerHTML = text;
+					innerProfile.innerHTML = text;
+					initprofile();
 				});
 			}
 		});
-		
-		window.zx_logout = ()=>login("login");
 	};
+	
+	window.zx_logout = ()=>
+	{
+		fetch("api/logout.php", {credentials: "same-origin"}).then(response=>
+		{
+			if(response.ok)
+			{
+				zx_login("login");
+			}
+		});
+	};
+	
+	initprofile();
 });

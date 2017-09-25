@@ -536,10 +536,13 @@ iframe
 a.link-front
 {
 	color: unset;
+	transition: 2.5s transform;
+	display: block;
 }
 
 a.link-front:hover
 {
 	animation: none;
 	color: hsl(350, 100%, 70%);
+	transform: scale(1.1);
 }

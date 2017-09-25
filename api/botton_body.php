@@ -10,7 +10,7 @@
 		{
 			$href = ' href="all.php/'.$codigo_estampa.'-'.$codigo_cor.'"';
 		}
-		// $esgotado = $estoque <= 0;
+		$esgotado = $estoque <= 0;
 		?>
 			<a<?php echo $href; ?>>
 				<h<?php echo $h; ?>>
@@ -33,9 +33,9 @@
 			?>
 			
 			<p>
-				<button type="button" class="icon-button">
+				<a href="cart.php?acao=add&botton=<?php echo $row['codigo']; ?>" class="icon-button">
 					<img src="images/add.svg" alt="adicionar ao carrinho" />
-				</button>
+				</a>
 			</p>
 			<p>
 				<a href="edit.php?<?php echo 'stamp='.$codigo_estampa.'&color='.$codigo_cor; ?>" class="icon-button">
