@@ -10,7 +10,9 @@
 		{
 			$href = ' href="all.php/'.$codigo_estampa.'-'.$codigo_cor.'"';
 		}
+		
 		$esgotado = $estoque <= 0;
+		
 		?>
 			<a<?php echo $href; ?>>
 				<h<?php echo $h; ?>>

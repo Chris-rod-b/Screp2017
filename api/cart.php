@@ -1,40 +1,39 @@
 <?php
 	if(isset($_GET['acao']))
 	{
-		if($_GET['acao'] == 'add')
+		if($_GET['acao'] === 'add')
 		{
 			$codigo_botton = $_GET['botton'];
 			$_SESSION['carrinho'][$codigo_botton]++;
 		}
 		
-		if($_GET['acao'] == 'del')
+		if($_GET['acao'] === 'del')
 		{
 			$codigo_botton = $_GET['botton'];
 			unset($_SESSION['carrinho'][$codigo_botton]);
 		}
 		
-		if($_GET['acao'] == 'up')
+		if($_GET['acao'] === 'up')
 		{
 			if(is_array($_POST['botton']))
 			{
-				foreach($_POST['botton'] as $codigo_botton => $qtd)
+				foreach($_POST['botton'] as $codigo_botton=>$qtd)
 				{
-					$codigo_botton  = intval($codigo_botton);
 					$qtd = intval($qtd);
-					if(!empty($qtd) || $qtd <> 0)
+					if(empty($qtd) && $qtd === 0)
 					{
-						$_SESSION['carrinho'][$codigo_botton] = $qtd;
+						unset($_SESSION['carrinho'][$codigo_botton]);
 					}
 					else
 					{
-						unset($_SESSION['carrinho'][$codigo_botton]);
+						$_SESSION['carrinho'][$codigo_botton] = $qtd;
 					}
 				}
 			}
 		}
 	}
 ?>
-<h4>Carrinho de Compras</h4>
+<h1>Carrinho de Compras</h1>
 <table>
 	<thead>
 		<tr>
@@ -50,29 +49,26 @@
 			<?php
 				include_once 'connect.php';
 				$total = 0;
-				foreach($_SESSION['carrinho'] as $codigo_botton => $qtd)
+				foreach($_SESSION['carrinho'] as $codigo_botton=>$qtd)
 				{
 					$sql = 'SELECT (estampa.nome || '."' '".' || cor.nome) AS nome, botton.preco FROM botton, estampa, cor WHERE botton.codigo=$1 AND NOT botton.excluido AND cor.codigo = botton.codigo_cor AND estampa.codigo = botton.codigo_estampa ORDER BY (estampa.nome || '."' '".' || cor.nome)';
 					$res = pg_query_params($connection, $sql, [$codigo_botton]);
-					$linha = pg_fetch_array($res);
+					$linha = pg_fetch_all($res)[0];
 					$nome = $linha['nome'];
 					$preco = $linha['preco'];
 					$sub = $preco*$qtd; 
 					$total += $sub;
-
+					
 					?>
 						<tr>
 							<td>Botton <?php echo $nome; ?></td>
-							<td><input type="text" size="3" name="<?php echo $botton['.$codigo_botton.']; ?>" value="<?php echo $qtd; ?>" /></td>
-							<td>R$ <?php echo number_format($qtd, 2, ',', '.'); ?></td>
+							<td><input type="number" size="3" min="0" max="999" name="qtde-<?php echo $botton['.$codigo_botton.']; ?>" value="<?php echo $qtd; ?>" /></td>
+							<td>R$ <?php echo number_format($preco, 2, ',', '.'); ?></td>
 							<td>R$ <?php echo number_format($sub, 2, ',', '.'); ?></td>
 							<td><a href="cart.php?acao=del&botton='.$codigo_botton.'">remover item</a></td>
-						</tr>';
+						</tr>
 					<?php
 				}
-				
-				$total = number_format($total, 2, ',', '.');
-				echo 'Total R$ '.$total;
 				
 				if(isset($_POST['enviar']))
 				{
@@ -85,8 +81,18 @@
 		</tr>
 	</tbody>
 </table>
+<p>
+	Total: R$
+	<?php
+		echo number_format($total, 2, ',', '.');
+	?>
+</p>
 <form method="post">
-	<input type="hidden" name="" value="" />
-	<button>finalizar pedido</button>
+	<p>
+		<input type="hidden" name="final" value="true" />
+		<button>finalizar pedido</button>
+	</p>
 </form>
-<a href="all.php">continuar comprando</a>
+<p>
+	<a href="all.php">continuar comprando</a>
+</p>
