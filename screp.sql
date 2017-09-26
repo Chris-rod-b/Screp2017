@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS botton;
 DROP TABLE IF EXISTS cor;
 DROP TABLE IF EXISTS estampa;
 DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS item_cart;
 
 CREATE TABLE usuario
 (
@@ -77,6 +78,15 @@ CREATE TABLE cliente
 CREATE TABLE admin
 (
 	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario (login)
+);
+
+CREATE TABLE item_cart
+(
+	codigo_cliente INTEGER NOT NULL REFERENCES cliente (codigo),
+	codigo_botton INTEGER NOT NULL REFERENCES botton (codigo),
+	preco_botton INTEGER NOT NULL,
+	quantidade INTEGER NOT NULL,
+	PRIMARY KEY (codigo_venda, codigo_botton)
 );
 
 INSERT INTO cor
