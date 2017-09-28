@@ -45,7 +45,7 @@
 			<body>
 				<script src="compat.js"></script>
 				<div id="main">
-					<header>
+					<header id="mainlogo">
 						<a<?php if($page !== 'home') echo ' href="home.php"'; ?>>
 							<img src="images/screp.png" width="100%" alt="Logo Screp" />
 						</a>

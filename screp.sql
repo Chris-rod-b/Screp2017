@@ -1,22 +1,9 @@
-DROP TABLE IF EXISTS admin;
-DROP TABLE IF EXISTS cliente;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS venda;
 DROP TABLE IF EXISTS botton;
 DROP TABLE IF EXISTS cor;
 DROP TABLE IF EXISTS estampa;
-DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS item_cart;
-
-CREATE TABLE usuario
-(
-	codigo SERIAL NOT NULL PRIMARY KEY;
-	login CHARACTER VARYING(50) NOT NULL UNIQUE,
-	senha CHARACTER VARYING(20) NOT NULL UNIQUE,
-	email CHARACTER VARYING(50) NOT NULL,
-	admin BOOLEAN NOT NULL,
-	data_exclusao DATE
-);
 
 CREATE TABLE estampa
 (
@@ -48,8 +35,8 @@ CREATE TABLE botton
 
 CREATE TABLE venda
 (
-	login_usuario CHARACTER VARYING(50) NOT NULL REFERENCES usuario (login),
-	concretizacao TIMESTAMP,
+	login_usuario CHARACTER VARYING(50) NOT NULL,
+	concretizacao TIMESTAMP UNIQUE,
 	codigo SERIAL NOT NULL PRIMARY KEY
 );
 
@@ -62,31 +49,12 @@ CREATE TABLE item
 	PRIMARY KEY (codigo_venda, codigo_botton)
 );
 
-CREATE TABLE cliente
-(
-	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario (login),
-	nome CHARACTER VARYING(60) NOT NULL,
-	sobrenome CHARACTER VARYING(60) NOT NULL,
-	cpf CHARACTER(14) NOT NULL,
-	rg CHARACTER(12),
-	endereco CHARACTER VARYING(120) NOT NULL,
-	cidade CHARACTER VARYING(50) NOT NULL,
-	estado CHARACTER(2) NOT NULL,
-	cep CHARACTER(9) NOT NULL
-);
-
-CREATE TABLE admin
-(
-	login CHARACTER VARYING(50) NOT NULL PRIMARY KEY REFERENCES usuario (login)
-);
-
 CREATE TABLE item_cart
 (
-	codigo_cliente INTEGER NOT NULL REFERENCES cliente (codigo),
+	codigo SERIAL PRIMARY KEY,
+	codigo_cliente INTEGER NOT NULL,
 	codigo_botton INTEGER NOT NULL REFERENCES botton (codigo),
-	preco_botton INTEGER NOT NULL,
-	quantidade INTEGER NOT NULL,
-	PRIMARY KEY (codigo_venda, codigo_botton)
+	quantidade INTEGER NOT NULL
 );
 
 INSERT INTO cor

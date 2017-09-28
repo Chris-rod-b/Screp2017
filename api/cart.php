@@ -65,7 +65,7 @@
 							<td><input type="number" size="3" min="0" max="999" name="qtde-<?php echo $botton['.$codigo_botton.']; ?>" value="<?php echo $qtd; ?>" /></td>
 							<td>R$ <?php echo number_format($preco, 2, ',', '.'); ?></td>
 							<td>R$ <?php echo number_format($sub, 2, ',', '.'); ?></td>
-							<td><a href="cart.php?acao=del&botton='.$codigo_botton.'">remover item</a></td>
+							<td><a href="cart.php?acao=del&botton=<?php echo $codigo_botton; ?>">remover item</a></td>
 						</tr>
 					<?php
 				}

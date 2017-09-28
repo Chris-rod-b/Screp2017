@@ -36,7 +36,7 @@
 		<figure class="image-sub">
 			<img src="images/botton3.png" alt="Teste" />
 			<figcaption>
-				<p>A série é baseada numa curta produzida para o Random! Cartoons, um programa incubador de séries animadas da Nicktoons e da Frederator Studios. Depois do curta se tornar um viral na Internet, o Cartoon Network selecionou-o para uma série completa, que estreou oficialmente em 5 de abril de 2010. </p>
+				<p>A série é baseada numa curta produzida para o Random! Cartoons, um programa incubador de séries animadas da Nicktoons e da Frederator Studios. Depois do curta se tornar um viral na Internet, o Cartoon Network selecionou-o para uma série completa, que estreou oficialmente em 5 de abril de 2010.</p>
 			</figcaption>
 		</figure>
 	</a>

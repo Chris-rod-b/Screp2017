@@ -546,3 +546,15 @@ a.link-front:hover
 	color: hsl(350, 100%, 70%);
 	transform: scale(1.1);
 }
+
+#mainlogo
+{
+	display: flex;
+	justify-content: center;
+}
+
+#mainlogo a
+{
+	display: block;
+	width: 35%;
+}

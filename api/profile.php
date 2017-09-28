@@ -28,6 +28,9 @@
 				</p>
 			</form>
 			<p>
+				<a href="formulario_envia.php">esqueci minha senha</a>
+			</p>
+			<p>
 				<a href="sign-up.php">não tenho conta</a>
 			</p>
 		<?php
