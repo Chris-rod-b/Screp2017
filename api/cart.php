@@ -1,39 +1,70 @@
 <?php
+	include_once 'connect.php';
+	include_once 'user.php';
 	if(isset($_GET['acao']))
 	{
-		if($_GET['acao'] === 'add')
+		if(isset($user_login_row))
 		{
-			$codigo_botton = $_GET['botton'];
-			$_SESSION['carrinho'][$codigo_botton]++;
-		}
-		
-		if($_GET['acao'] === 'del')
-		{
-			$codigo_botton = $_GET['botton'];
-			unset($_SESSION['carrinho'][$codigo_botton]);
-		}
-		
-		if($_GET['acao'] === 'up')
-		{
-			if(is_array($_POST['botton']))
+			if($_GET['acao'] === 'add')
 			{
-				foreach($_POST['botton'] as $codigo_botton=>$qtd)
+				$codigo_botton = $_GET['botton'];
+				$sql = 'WITH t AS (UPDATE item_cart SET quantidade = quantidade + 1 WHERE codigo_botton = $1 RETURNING codigo)
+				        INSERT INTO item_cart
+				            (codigo_cliente, codigo_botton, quantidade)
+				            SELECT $2, $1, 1 WHERE NOT EXISTS (SELECT codigo FROM t)';
+				pg_query_params($connection, $sql, [$codigo_botton, $user_login_row['id_usuario']]);
+			}
+			
+			if($_GET['acao'] === 'del')
+			{
+				$codigo_botton = $_GET['botton'];
+				pg_query_params($connection, 'DELETE FROM item_cart WHERE codigo_botton = $1', [$codigo_botton]);
+			}
+			
+			if($_GET['acao'] === 'up')
+			{
+				
+			}
+		}
+		/*
+		else
+		{
+			if($_GET['acao'] == 'add')
+			{
+				$codigo_botton = $_GET['botton'];
+				$_SESSION['carrinho'][$codigo_botton]++;
+			}
+			
+			if($_GET['acao'] == 'del')
+			{
+				$codigo_botton = $_GET['botton'];
+				unset($_SESSION['carrinho'][$codigo_botton]);
+			}
+			
+			if($_GET['acao'] == 'up')
+			{
+				if(is_array($_POST['botton']))
 				{
-					$qtd = intval($qtd);
-					if(empty($qtd) && $qtd === 0)
+					foreach($_POST['botton'] as $codigo_botton => $qtd)
 					{
-						unset($_SESSION['carrinho'][$codigo_botton]);
-					}
-					else
-					{
-						$_SESSION['carrinho'][$codigo_botton] = $qtd;
+						$codigo_botton  = intval($codigo_botton);
+						$qtd = intval($qtd);
+						if(!empty($qtd) || $qtd <> 0)
+						{
+							$_SESSION['carrinho'][$codigo_botton] = $qtd;
+						}
+						else
+						{
+							unset($_SESSION['carrinho'][$codigo_botton]);
+						}
 					}
 				}
 			}
 		}
+		*/
 	}
 ?>
-<h1>Carrinho de Compras</h1>
+<h4>Carrinho de Compras</h4>
 <table>
 	<thead>
 		<tr>
@@ -49,11 +80,10 @@
 			<?php
 				include_once 'connect.php';
 				$total = 0;
-				foreach($_SESSION['carrinho'] as $codigo_botton=>$qtd)
+				foreach(pg_fetch_all(pg_query_params($connection, 'SELECT item_cart.codigo_botton, item_cart.quantidade, (estampa.nome || '."' '".' || cor.nome) AS nome, botton.preco FROM item_cart, botton, estampa, cor WHERE botton.codigo = item_cart.codigo_botton AND NOT botton.excluido AND cor.codigo = botton.codigo_cor AND estampa.codigo = botton.codigo_estampa ORDER BY estampa.nome, cor.nome', [])) as $linha)
 				{
-					$sql = 'SELECT (estampa.nome || '."' '".' || cor.nome) AS nome, botton.preco FROM botton, estampa, cor WHERE botton.codigo=$1 AND NOT botton.excluido AND cor.codigo = botton.codigo_cor AND estampa.codigo = botton.codigo_estampa ORDER BY (estampa.nome || '."' '".' || cor.nome)';
-					$res = pg_query_params($connection, $sql, [$codigo_botton]);
-					$linha = pg_fetch_all($res)[0];
+					$codigo_botton = $linha['codigo_botton'];
+					$qtd = $linha['quantidade'];
 					$nome = $linha['nome'];
 					$preco = $linha['preco'];
 					$sub = $preco*$qtd; 
@@ -62,7 +92,7 @@
 					?>
 						<tr>
 							<td>Botton <?php echo $nome; ?></td>
-							<td><input type="number" size="3" min="0" max="999" name="qtde-<?php echo $botton['.$codigo_botton.']; ?>" value="<?php echo $qtd; ?>" /></td>
+							<td><input type="number" size="3" min="1" max="999" name="qtde-<?php echo $botton[$codigo_botton]; ?>" value="<?php echo $qtd; ?>" /></td>
 							<td>R$ <?php echo number_format($preco, 2, ',', '.'); ?></td>
 							<td>R$ <?php echo number_format($sub, 2, ',', '.'); ?></td>
 							<td><a href="cart.php?acao=del&botton=<?php echo $codigo_botton; ?>">remover item</a></td>
