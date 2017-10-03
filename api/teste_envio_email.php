@@ -3,7 +3,7 @@
 	include("PHPMailer/class.smtp.php");
 	include "connect_s.php";
 	$login = $_POST['login'];
-	$email= $_POST['email'];
+	$email = $_POST['email'];
 	// Inicia a classe PHPMailer
 	$mail = new PHPMailer(true);
 	// Define os dados do servidor e tipo de conexão
@@ -37,10 +37,7 @@
 	$mail->CharSet = 'utf-8'; // Charset da mensagem (opcional)
 	// Define a mensagem (Texto e Assunto)
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	for ($i = 0; $i < 1; $i++)
-	{
-		$Novasenha =uniqid();
-	}
+	$Novasenha = uniqid();
 	
 	$mail->Subject  = "Screp Bottons - Recuperação de senha."; // Assunto da mensagem
 	$mail->Body = "Olá, ".$login."<br>Você nos solicitou uma recuperação de senha para o acesso de sua conta. Caso não seja o endereço de e-mail correto entre em contato conosco.<p>Nova senha:".$Novasenha;
@@ -60,7 +57,8 @@
 	$mail->ClearAttachments();
 	// Exibe uma mensagem de resultado
 	
-	if ($enviado==true) {
+	if($enviado)
+	{
 		
 		$Novasenha= md5($senha);
 		
@@ -72,7 +70,8 @@
 		{
 			echo "Senha alterada!";
 		}
-		else{
+		else
+		{
 			echo "Senha não alterada !";
 		}
 		echo "E-mail enviado com sucesso!";

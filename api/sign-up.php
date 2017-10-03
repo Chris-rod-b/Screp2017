@@ -113,5 +113,5 @@
 		<input id="phone-cell" class="input-block" name="celular" pattern="\(([0-9]{2})\) *[0-9]{4,5}-[0-9]{4}" />
 	</p>
 	
-	<button class="signup-button-disable">cadastrar</button>	
+	<button class="signup-button-disable">cadastrar</button>
 </form>

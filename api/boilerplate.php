@@ -1,5 +1,5 @@
 <?php
-	$pages = array('home'=>array('name'=>'home', 'nav'=>true), 'all'=>array('name'=>'produtos', 'subfolder'=>true, 'nav'=>true), 'design'=>array('name'=>'design', 'nav'=>true), 'sitemap'=>array('name'=>'mapa', 'nav'=>true), 'edit'=>array('name'=>'alteração/inclusão'), 'sign-up'=>array('name'=>'cadastro'));
+	$pages = array('home'=>array('name'=>'home', 'nav'=>true), 'all'=>array('name'=>'produtos', 'subfolder'=>true, 'nav'=>true), 'design'=>array('name'=>'design', 'nav'=>true), 'sitemap'=>array('name'=>'mapa', 'nav'=>true), 'edit'=>array('name'=>'alteração/inclusão'), 'sign-up'=>array('name'=>'cadastro'), 'cart'=>array('name'=>'carrinho de compras'));
 	$page = basename($_SERVER['SCRIPT_NAME'], '.php');
 	
 	$people = array(array('13', 'Sabrina'), array('02', 'Christian'), array('08', 'José Rogério'), array('14', 'Elias'), array('12', 'Pedro'));
