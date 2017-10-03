@@ -11,11 +11,6 @@ fieldset
 	overflow: visible;
 }
 
-fieldset legend + *
-{
-	margin-top: 0en;
-}
-
 legend
 {
 	border: inherit;

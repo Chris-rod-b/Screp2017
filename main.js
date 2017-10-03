@@ -55,6 +55,87 @@ document.addEventListener("DOMContentLoaded", ()=>
 	
 	let navlinks = document.querySelectorAll("a[data-href]");
 	
+	window.zx_goto = href=>
+	{
+		let pagename = pagenames[href.split("/")[0]];
+		let url;
+		let unfound = !pagename.subfolder && href.includes('/');
+		if(unfound)
+		{
+			url = "unfound.php";
+		}
+		else
+		{
+			url = href;
+		}
+		fetch("api/"+url, {credentials: "same-origin"}).then(response=>
+		{
+			if(response.ok)
+			{
+				response.text().then(text=>
+				{
+					scrollTo(0, 0);
+					
+					main.innerHTML = text;
+					
+					if(href === "home.php")
+					{
+						big.removeAttribute("href");
+						mini.removeAttribute("href");
+					}
+					else
+					{
+						big.href = mini.href = "home.php";
+					}
+					
+					for(let a of navlinks)
+					{
+						let dhref = a.dataset.href;
+						if(href === dhref)
+						{
+							a.removeAttribute("href");
+						}
+						else
+						{
+							a.href = dhref;
+						}
+					}
+					
+					if(unfound)
+					{
+						document.title = "screp \u2014 não encotrado";
+					}
+					else
+					{
+						document.title = "screp \u2014 " + pagename.name;
+						let script = document.createElement("script");
+						script.src = "scripts/"+pagename.js;
+						pagescript.replaceWith(script);
+						pagescript = script;
+					}
+					history.pushState(null, null, href);
+				});
+			}
+			else
+			{
+				scrollTo(0, 0);
+				main.textContent = "";
+				let h1 = document.createElement("h1");
+				h1.textContent = "Erro Desconhecido";
+				let p = document.createElement("p");
+				p.textContent = "Ocorreu um erro ao carregar essa página.";
+				main.append(h1, p);
+				document.title = "screp \u2014 erro";
+				big.href = mini.href = "home.php";
+				for(let a of navlinks)
+				{
+					a.href = a.dataset.href;
+				}
+				history.pushState(null, null, "/error");
+			}
+		});
+	};
+	
 	window.addEventListener("blur", ()=>{profile.hidden = true; update();});
 	window.addEventListener("click", event=>
 	{
@@ -64,85 +145,9 @@ document.addEventListener("DOMContentLoaded", ()=>
 		for(let current = target; current; current = current.parentNode)
 		{
 			let href;
-			if(current.localName === "a" && (href = current.getAttribute("href")) && /^[^\/]*?\.php(\/.*)?$/.test(href))
+			if(current.localName === "a" && (href = current.getAttribute("href")) && /^[^\/]+?\.php(\/.*)?$/.test(href))
 			{
-				let pagename = pagenames[href.split("/")[0]];
-				let url;
-				let unfound = !pagename.subfolder && href.includes('/');
-				if(unfound)
-				{
-					url = "unfound.php";
-				}
-				else
-				{
-					url = href;
-				}
-				fetch("api/"+url, {credentials: "same-origin"}).then(response=>
-				{
-					if(response.ok)
-					{
-						response.text().then(text=>
-						{
-							scrollTo(0, 0);
-							
-							main.innerHTML = text;
-							
-							if(href === "home.php")
-							{
-								big.removeAttribute("href");
-								mini.removeAttribute("href");
-							}
-							else
-							{
-								big.href = mini.href = "home.php";
-							}
-							
-							for(let a of navlinks)
-							{
-								let dhref = a.dataset.href;
-								if(href === dhref)
-								{
-									a.removeAttribute("href");
-								}
-								else
-								{
-									a.href = dhref;
-								}
-							}
-							
-							if(unfound)
-							{
-								document.title = "screp \u2014 não encotrado";
-							}
-							else
-							{
-								document.title = "screp \u2014 " + pagename.name;
-								let script = document.createElement("script");
-								script.src = "scripts/"+pagename.js;
-								pagescript.replaceWith(script);
-								pagescript = script;
-							}
-							history.pushState(null, null, href);
-						});
-					}
-					else
-					{
-						scrollTo(0, 0);
-						main.textContent = "";
-						let h1 = document.createElement("h1");
-						h1.textContent = "Erro Desconhecido";
-						let p = document.createElement("p");
-						p.textContent = "Ocorreu um erro ao carregar essa página.";
-						main.append(h1, p);
-						document.title = "screp \u2014 erro";
-						big.href = mini.href = "home.php";
-						for(let a of navlinks)
-						{
-							a.href = a.dataset.href;
-						}
-						history.pushState(null, null, "/error");
-					}
-				});
+				zx_goto(href);
 				event.preventDefault();
 				out = true;
 				break;
@@ -203,7 +208,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 		}
 	};
 	
-	window.zx_login = name =>
+	window.zx_login = (name, callback) =>
 	{
 		innerProfile.textContent = "";
 		let button = document.querySelector("#p-button");
@@ -216,6 +221,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 				{
 					innerProfile.innerHTML = text;
 					initprofile();
+					callback();
 				});
 			}
 		});

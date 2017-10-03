@@ -6,7 +6,8 @@ pre:first-child,
 ul:first-child,
 ol:first-child,
 p:first-child,
-table:first-child
+table:first-child,
+details:first-child,
 
 summary + article,
 summary + figure,
@@ -14,15 +15,17 @@ summary + pre,
 summary + ul,
 summary + ol,
 summary + p,
-summary + table
+summary + table,
+summary + details,
 
 legend + article,
 legend + figure,
 legend + pre,
 legend + ul,
 legend + ol,
-legend + p
-legend + table
+legend + p,
+legend + table,
+legend + details
 {
 	margin-top: 0em; /* margin-block-start: 0em; */
 }

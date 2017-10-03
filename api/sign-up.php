@@ -36,43 +36,49 @@
 	
 	<fieldset>
 		<legend>Endereço</legend>
+		<template id="address-template">
+			<details>
+				<summary><span class="address-name">Endereço</span> <button type="button" class="delete-address">excluir</button></summary>
+				<p>
+					<label data-for="country">País*:</label>
+				</p>
+				<p>
+					<input data-id="country" class="input-block" data-name="pais" required />
+				</p>
+				
+				<p>
+					<label data-for="state">Estado*:</label>
+				</p>
+				<p>
+					<input data-id="state" class="input-block" data-name="estado" required size="2" min-length="2" max-length="2" />
+				</p>
+				
+				<p>
+					<label data-for="city">Cidade*:</label>
+				</p>
+				<p>
+					<input data-id="city" class="input-block" data-name="cidade" required />
+				</p>
+				
+				<p>
+					<label data-for="address">Endereço*:</label>
+				</p>
+				<p>
+					<input data-id="address" class="input-block" data-name="endereco" required />
+					<input type="hidden" name="addresses[]" data-value="address"/>
+				</p>
+				
+				<p>
+					<label data-for="complement">Complemento (opcional):</label>
+				</p>
+				<p>
+					<input data-id="complement" class="input-block" data-name="complemento" />
+				</p>
+			</details>
+		</template>
+		<button type="button" class="add-address">adicionar endereço</button>
 	</fieldset>
 	
-	<p>
-		<label for="address">Endereço*:</label>
-	</p>
-	<p>
-		<input id="address" class="input-block" name="endereco" required />
-	</p>
-	
-	<p>
-		<label for="complement">Complemento:</label>
-	</p>
-	<p>
-		<input id="complement" class="input-block" name="complemento" />
-	</p>
-
-	<p>
-		<label for="city">Cidade*:</label>
-	</p>
-	<p>
-		<input id="city" class="input-block" name="cidade" required />
-	</p>
-
-	<p>
-		<label for="state">Estado*:</label>
-	</p>
-	<p>
-		<input id="state" class="input-block" name="estado" required size="2" min-length="2" max-length="2" />
-	</p>
-
-	<p>
-		<label for="country">País*:</label>
-	</p>
-	<p>
-		<input id="country" class="input-block" name="pais" required />
-	</p>
-					
 	<p>
 		<label for="cpf">CPF*:</label>
 	</p>
@@ -100,17 +106,17 @@
 	</p>
 	
 	<p>
-		<label for="phone-home">Telefone residencial:</label>
+		<label for="phone-home">Telefone residencial (opcional):</label>
 	</p>
 	<p>
-		<input id="phone-home" class="input-block" name="telefone" pattern="\(([0-9]{2})\) *[0-9]{4,5}-[0-9]{4}" />
+		<input id="phone-home" class="input-block" name="telefone" pattern="\(([0-9]{2})\)[0-9]{4,5}-[0-9]{4}" />
 	</p>
 	
 	<p>
-		<label for="phone-cell">Celular:</label>
+		<label for="phone-cell">Celular (opcional):</label>
 	</p>
 	<p>
-		<input id="phone-cell" class="input-block" name="celular" pattern="\(([0-9]{2})\) *[0-9]{4,5}-[0-9]{4}" />
+		<input id="phone-cell" class="input-block" name="celular" pattern="\(([0-9]{2})\)[0-9]{4,5}-[0-9]{4}" />
 	</p>
 	
 	<button class="signup-button-disable">cadastrar</button>
