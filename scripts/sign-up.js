@@ -49,7 +49,7 @@
 			});
 			
 			let nameout = cloned.querySelector(".address-name");
-			let namein = cloned.querySelector("[data-id=\"address\"");
+			let namein = cloned.querySelector("[data-id=\"address\"]");
 			namein.addEventListener("input", ()=>
 			{
 				let value = namein.value;
