@@ -35,8 +35,8 @@ CREATE TABLE botton
 
 CREATE TABLE venda
 (
-	login_usuario CHARACTER VARYING(50) NOT NULL,
-	concretizacao TIMESTAMP UNIQUE,
+	codigo_cliente INTEGER NOT NULL,
+	concretizacao TIMESTAMP NOT NULL UNIQUE,
 	codigo SERIAL NOT NULL PRIMARY KEY
 );
 
