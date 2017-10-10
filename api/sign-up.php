@@ -3,35 +3,35 @@
 		<label for="login">Login*:</label>
 	</p>
 	<p>
-		<input id="login" class="input-block" name="login" required />
+		<input id="login" class="input-block" name="login" required value="Zambonifofex" />
 	</p>
 	
 	<p>
 		<label for="email">Email*:</label>
 	</p>
 	<p>
-		<input id="email" class="input-block" name="email" type="email" required />
+		<input id="email" class="input-block" name="email" type="email" required value="zambonifofex@gmail.com" />
 	</p>
 	
 	<p>
 		<label for="senha">Senha*:</label>
 	</p>
 	<p>
-		<input id="senha" class="input-block" name="password" type="password" required />
+		<input id="senha" class="input-block" name="password" type="password" required  value="1234" />
 	</p>
 	
 	<p>
 		<label for="name">Nome*:</label>
 	</p>
 	<p>
-		<input id="name" class="input-block" name="nome" required />
+		<input id="name" class="input-block" name="nome" required value="Pedro" />
 	</p>
 	
 	<p>
 		<label for="surname">Sobrenome*:</label>
 	</p>
 	<p>
-		<input id="surname" class="input-block" name="sobrenome" required />
+		<input id="surname" class="input-block" name="sobrenome" required value="M. Zamboni" />
 	</p>
 	
 	<fieldset>
@@ -43,7 +43,7 @@
 					<label data-for="country">País*:</label>
 				</p>
 				<p>
-					<input data-id="country" class="input-block" data-name="pais" required />
+					<input data-id="country" class="input-block" data-name="pais" required value="Brasil" />
 				</p>
 				
 				<p>
@@ -57,7 +57,21 @@
 					<label data-for="city">Cidade*:</label>
 				</p>
 				<p>
-					<input data-id="city" class="input-block" data-name="cidade" required />
+					<input data-id="city" class="input-block" data-name="cidade" required value="Bauru" />
+				</p>
+				
+				<p>
+					<label data-for="bairro">Bairro*:</label>
+				</p>
+				<p>
+					<input data-id="bairro" class="input-block" data-name="bairro" required />
+				</p>
+				
+				<p>
+					<label data-for="zip">CEP*:</label>
+				</p>
+				<p>
+					<input data-id="zip" class="input-block" data-name="cep" required pattern="[0-9]{5}-[0-9]{3}" />
 				</p>
 				
 				<p>
@@ -66,6 +80,13 @@
 				<p>
 					<input data-id="address" class="input-block" data-name="endereco" required />
 					<input type="hidden" name="addresses[]" data-value="address"/>
+				</p>
+				
+				<p>
+					<label data-for="number">Número*:</label>
+				</p>
+				<p>
+					<input data-id="number" class="input-block" data-name="numero" required />
 				</p>
 				
 				<p>
@@ -83,14 +104,14 @@
 		<label for="cpf">CPF*:</label>
 	</p>
 	<p>
-		<input id="cpf" class="input-block" pattern="[0-9]{11,14}" minlength="11" maxlength="14" name="cpf" required />
+		<input id="cpf" class="input-block" pattern="[0-9]{11,14}" minlength="11" maxlength="14" name="cpf" required value="11111111111" />
 	</p>
 	
 	<p>
 		<fieldset>
 			<legend>Gênero*:</legend>
 			<p>
-				<label><input type="radio" name="sexo" value="M" /> Masculino</label>
+				<label><input type="radio" name="sexo" value="M" checked /> Masculino</label>
 			</p>
 			<p>
 				<label><input type="radio" name="sexo" value="F" /> Feminino</label>
@@ -102,7 +123,7 @@
 		<label for="birth">Data de Nascimento*:</label>
 	</p>
 	<p>
-		<input id="birth" class="input-block" type="date" name="data_nasc" required />
+		<input id="birth" class="input-block" type="date" name="data_nasc" required value="1999-04-05" />
 	</p>
 	
 	<p>
