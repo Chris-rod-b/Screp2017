@@ -15,7 +15,7 @@
 				foreach(pg_fetch_all(pg_query_params($connection, 'SELECT concretizacao, codigo FROM venda WHERE codigo_cliente = $1', [$user_login_row['id_usuario']])) as $linha)
 				{
 					$data = $linha['concretizacao'];
-                    $cod= $linha['codigo'];
+					$cod= $linha['codigo'];
 					$preco = $linha['preco'];
 					
 					?>
@@ -26,7 +26,7 @@
 						</tr>
 					<?php
 				}
-            ?>
-        </tr>
-    </tbody>
+			?>
+		</tr>
+	</tbody>
 </table>

@@ -37,65 +37,10 @@
 	<fieldset>
 		<legend>Endereço</legend>
 		<template id="address-template">
-			<details>
-				<summary><span class="address-name">Endereço</span> <button type="button" class="delete-address">excluir</button></summary>
-				<p>
-					<label data-for="country">País*:</label>
-				</p>
-				<p>
-					<input data-id="country" class="input-block" data-name="pais" required value="Brasil" />
-				</p>
-				
-				<p>
-					<label data-for="state">Estado*:</label>
-				</p>
-				<p>
-					<input data-id="state" class="input-block" data-name="estado" required size="2" min-length="2" max-length="2" />
-				</p>
-				
-				<p>
-					<label data-for="city">Cidade*:</label>
-				</p>
-				<p>
-					<input data-id="city" class="input-block" data-name="cidade" required value="Bauru" />
-				</p>
-				
-				<p>
-					<label data-for="bairro">Bairro*:</label>
-				</p>
-				<p>
-					<input data-id="bairro" class="input-block" data-name="bairro" required />
-				</p>
-				
-				<p>
-					<label data-for="zip">CEP*:</label>
-				</p>
-				<p>
-					<input data-id="zip" class="input-block" data-name="cep" required pattern="[0-9]{5}-[0-9]{3}" />
-				</p>
-				
-				<p>
-					<label data-for="address">Endereço*:</label>
-				</p>
-				<p>
-					<input data-id="address" class="input-block" data-name="endereco" required />
-					<input type="hidden" name="addresses[]" data-value="address"/>
-				</p>
-				
-				<p>
-					<label data-for="number">Número*:</label>
-				</p>
-				<p>
-					<input data-id="number" class="input-block" data-name="numero" required />
-				</p>
-				
-				<p>
-					<label data-for="complement">Complemento (opcional):</label>
-				</p>
-				<p>
-					<input data-id="complement" class="input-block" data-name="complemento" />
-				</p>
-			</details>
+			<?php
+				include_once 'endereco.php';
+				endereco([['pais'=>'Brasil', 'cidade'=>'Bauru', 'estado'=>'SP']]);
+			?>
 		</template>
 		<button type="button" class="add-address">adicionar endereço</button>
 	</fieldset>
