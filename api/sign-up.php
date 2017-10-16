@@ -34,16 +34,10 @@
 		<input id="surname" class="input-block" name="sobrenome" required />
 	</p>
 	
-	<fieldset>
-		<legend>Endereço</legend>
-		<template id="address-template">
-			<?php
-				include_once 'endereco.php';
-				endereco([['pais'=>'Brasil', 'cidade'=>'Bauru', 'estado'=>'SP']]);
-			?>
-		</template>
-		<button type="button" class="add-address">adicionar endereço</button>
-	</fieldset>
+	<?php
+		include_once 'endereco.php';
+		endereco([['pais'=>'Brasil', 'cidade'=>'Bauru', 'estado'=>'SP']]);
+	?>
 	
 	<p>
 		<label for="cpf">CPF*:</label>

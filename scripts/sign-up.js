@@ -1,5 +1,5 @@
 {
-	let handler = ()=>
+	let handler = async ()=>
 	{
 		let form = document.querySelector("#signup-form");
 		form.addEventListener("submit", event=>
@@ -22,63 +22,7 @@
 		
 		let addressindex = 0;
 		
-		let createAddress = () =>
-		{
-			let cloned = address_template.content.cloneNode(true);
-			for(let withfor of cloned.querySelectorAll("[data-for]"))
-			{
-				withfor.htmlFor = withfor.dataset.for+"-"+addressindex;
-			}
-			for(let withname of cloned.querySelectorAll("[data-name]"))
-			{
-				withname.name = withname.dataset.name+"-"+addressindex;
-			}
-			for(let withid of cloned.querySelectorAll("[data-id]"))
-			{
-				withid.id = withid.dataset.id+"-"+addressindex;
-			}
-			for(let withvalue of cloned.querySelectorAll("[data-value]"))
-			{
-				withvalue.value = withvalue.dataset.value+"-"+addressindex;
-			}
-			
-			let delbut = cloned.querySelector(".delete-address");
-			delbut.addEventListener("click", ()=>
-			{
-				delbut.closest("details").remove();
-			});
-			
-			let nameout = cloned.querySelector(".address-name");
-			let namein = cloned.querySelector("[data-id=\"address\"]");
-			namein.addEventListener("input", ()=>
-			{
-				let value = namein.value;
-				if(value)
-				{
-					nameout.textContent = value;
-				}
-				else
-				{
-					nameout.textContent = "Endereço";
-				}
-			});
-			
-			addressindex++;
-			return(cloned);
-		};
-		
-		let moreaddresses = form.querySelector(".add-address");
-		
-		let address = createAddress();
-		address.querySelector("details").open = true;
-		address.querySelector(".delete-address").disabled = true;
-		moreaddresses.before(address);
-		
-		moreaddresses.addEventListener("click", ()=>
-		{
-			let address = createAddress();
-			moreaddresses.before(address);
-		});
+		eval(await (await fetch("scripts/address.js", {credentials: "same-origin"})).text());
 	};
 	
 	if(document.readyState === "complete")

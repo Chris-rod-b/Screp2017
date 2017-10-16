@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", ()=>
 		{
 			if(response.ok)
 			{
-				zx_login("login");
+				zx_login("login", ()=>zx_goto("home.php"));
 			}
 		});
 	};

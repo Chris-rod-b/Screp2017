@@ -14,6 +14,7 @@
 	
 	endereco(pg_fetch_all(pg_query_params($connection_s, $sql, [$user_login_row['id_usuario']])));
 ?>
+<button type="button" class="add-address">adicionar endereço</button>
 <p>
 	<a href="api/shop.php">finalizar pedido</a>
 </p>
