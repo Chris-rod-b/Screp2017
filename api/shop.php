@@ -1,8 +1,8 @@
 <?php
 	include_once 'connect.php';
 	include_once 'user.php';
-	$sql = 'WITH v AS (INSERT INTO venda (codigo_cliente, concretizacao) VALUES ($1, LOCALTIMESTAMP) RETURNING codigo), i AS (SELECT botton.codigo, item_cart.quantidade, botton.preco FROM item_cart, botton WHERE item_cart.codigo_cliente = $1 AND item_cart.codigo_botton = botton.codigo AND item_cart.quantidade <= botton.estoque), s AS (INSERT INTO item (codigo_venda, codigo_botton, preco_botton, quantidade) SELECT v.codigo, i.codigo, i.preco, i.quantidade FROM v, i), g AS (DELETE FROM item_cart WHERE item_cart.codigo_cliente = $1) UPDATE botton SET estoque = botton.estoque - i.quantidade FROM i WHERE botton.codigo = i.codigo';
-	pg_query_params($connection, $sql, [$user_login_row['id_usuario']]);
+	$sql = 'WITH v AS (INSERT INTO venda (codigo_cliente, concretizacao) VALUES ($1, LOCALTIMESTAMP) RETURNING codigo), i AS (SELECT botton.codigo, item_cart.quantidade, botton.preco FROM item_cart, botton WHERE item_cart.codigo_cliente = $1 AND item_cart.codigo_botton = botton.codigo AND item_cart.quantidade <= botton.estoque), s AS (INSERT INTO item (codigo_venda, codigo_botton, preco_botton, quantidade) SELECT v.codigo, i.codigo, i.preco, i.quantidade FROM v, i), g AS (DELETE FROM item_cart WHERE item_cart.codigo_cliente = $1) UPDATE botton SET estoque = botton.estoque - i.quantidade FROM i, v WHERE botton.codigo = i.codigo RETURNING v.codigo';
+	$codigo_venda = pg_fetch_all(pg_query_params($connection, $sql, [$user_login_row['id_usuario']]))[0]['codigo'];
 	http_response_code(303);
 	$location = dirname(dirname($_SERVER['SCRIPT_NAME']));
 	if(substr($location, -1) !== '/')
@@ -34,9 +34,9 @@
 	$mail->AddAddress($email, $nome);
 	$mail->AddAddress($email);
 	
-	$sql = 'SELECT '."'".'Botton'."'".'||'."' '".'||estampa.nome||'."' '".'||cor.nome AS nome, item_cart.quantidade, botton.preco AS preco_botton, item_cart.quantidade*botton.preco AS subtotal FROM item_cart, botton, cor, estampa WHERE botton.codigo = item_cart.codigo_botton AND cor.codigo = botton.codigo_cor AND estampa.codigo = botton.codigo_estampa ORDER BY estampa.nome, cor.nome';
+	$sql = 'SELECT '."'".'Botton'."'".'||'."' '".'||estampa.nome||'."' '".'||cor.nome AS nome, item.quantidade, botton.preco AS preco_botton, item.quantidade*botton.preco AS subtotal FROM item, botton, cor, estampa, venda WHERE item.codigo_venda = venda.codigo AND venda.codigo_cliente = $1 AND venda.codigo = $2 AND botton.codigo = item.codigo_botton AND cor.codigo = botton.codigo_cor AND estampa.codigo = botton.codigo_estampa ORDER BY estampa.nome, cor.nome';
 	
-	$rows = pg_fetch_all(pg_query($connection, $sql));
+	$rows = pg_fetch_all(pg_query_params($connection, $sql, [$user_login_row['id_usuario'], $codigo_venda]));
 	
 	$email_body = '
 		<table>
