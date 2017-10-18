@@ -6,6 +6,8 @@
 		$codigo_estampa = $row['codigo_estampa'];
 		$codigo_cor = $row['codigo_cor'];
 		$nome = $row['nome'];
+		$codigo = $row['codigo'];
+		
 		if($link)
 		{
 			$href = ' href="all.php/'.$codigo_estampa.'-'.$codigo_cor.'"';
@@ -21,7 +23,7 @@
 			</a>
 			<p class="botton-image">
 				<a<?php echo $href; ?>>
-					<img src="images/botton.svg" alt="imagem do botton" />
+					<img src="images/bottons/<?php echo $codigo; ?>.png" alt="imagem do botton" />
 				</a>
 			</p>
 			<p>
@@ -35,7 +37,7 @@
 			?>
 			
 			<p>
-				<a href="cart.php?acao=add&botton=<?php echo $row['codigo']; ?>" class="icon-button">
+				<a href="cart.php?acao=add&botton=<?php echo $codigo; ?>" class="icon-button">
 					<img src="images/add.svg" alt="adicionar ao carrinho" />
 				</a>
 			</p>

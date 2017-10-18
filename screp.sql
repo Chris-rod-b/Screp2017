@@ -1,9 +1,9 @@
+DROP TABLE IF EXISTS item_cart;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS venda;
 DROP TABLE IF EXISTS botton;
 DROP TABLE IF EXISTS cor;
 DROP TABLE IF EXISTS estampa;
-DROP TABLE IF EXISTS item_cart;
 
 CREATE TABLE estampa
 (
@@ -58,15 +58,37 @@ CREATE TABLE item_cart
 );
 
 INSERT INTO cor
-	(r, g, b, nome)
+	(r, g, b, nome, codigo)
 	VALUES
-	(0, 0, 0, 'preto'),
-	(0, 0, 255, 'azul'),
-	(0, 255, 0, 'lima'),
-	(0, 255, 255, 'aqua'),
-	(255, 0, 0, 'vermelho'),
-	(255, 0, 255, 'magenta'),
-	(255, 255, 0, 'amarelo'),
-	(255, 255, 255, 'branco');
+	(0, 0, 0, 'branco', 0),
+	(0, 0, 1, 'preto', 1),
+	(0, 0, 2, 'azul claro', 2),
+	(0, 0, 3, 'laranja', 3);
 
-INSERT INTO estampa (nome) VALUES ('Bob Esponja'), ('minion'), ('Superman'), ('Batman');
+INSERT INTO estampa
+	(codigo, nome)
+	VALUES
+	( 1, 'Darth Vader'),
+	( 2, 'Game of Thrones'),
+	( 3, 'Grey''s Anatomy'),
+	( 4, 'Guns ''n'' Roses'),
+	( 5, 'Harry Potter'),
+	( 6, 'Jake'),
+	( 7, 'minions'),
+	( 8, 'Nirvana'),
+	( 9, 'Rolling Stones'),
+	(10, 'Rosquinha');
+
+INSERT INTO botton
+	(codigo, estoque, preco, codigo_estampa, codigo_cor)
+	VALUES
+	(     1,      10,     3,              1,          0),
+	(     2,      10,     3,              2,          1),
+	(     3,      10,     3,              3,          2),
+	(     4,      10,     3,              4,          1),
+	(     5,      10,     3,              5,          0),
+	(     6,      10,     3,              6,          3),
+	(     7,      10,     3,              7,          0),
+	(     8,      10,     3,              8,          1),
+	(     9,      10,     3,              9,          1),
+	(    10,      10,     3,             10,          3);
